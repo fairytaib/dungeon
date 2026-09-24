@@ -624,7 +624,7 @@
             onSuccess: {
               next: "THE_MOCKING_OF_DARNKESS",
               statDelta: +3,
-              log: "+3 Lust\nAs your fingers extend toward the polished gold handle of the green birchwood door, the ambient air freezes. The tranquil scent of blooming flora instantly curdles into a sharp, acrid stench.\n\nThe moment your skin grazes the cold metal, a violent shudder rips through the timber.\n\nThe door convulses in visceral disgust, as if your very touch were a searing poison. Before you can even pull your hand back, the wood recoils with a deafening CRACK and slams shut against its frame with terrifying force. The living orchid tendrils wither instantly, turning to ash, and the glowing emerald light of the runes snaps out, plunging the threshold back into dead, unyielding shadow.\n\nA crushing, suffocating wave of shame and regret crashes down upon you, heavy enough to drop you to your knees. It radiates from that deep, throbbing pulse in your belly, burning through your chest like liquid lead.\n\nThe harsh, undeniable truth settles in your mind with agonizing clarity: you are already too filthy to cross this threshold. The dark, untamed desire coiling within your core has stained you, making your soul too heavy, your lust too high, to ever step into a place of untainted purity. The green door has rejected you—and it will not open again.
+              log: "+3 Lust\nAs your fingers extend toward the polished gold handle of the green birchwood door, the ambient air freezes. The tranquil scent of blooming flora instantly curdles into a sharp, acrid stench.\n\nThe moment your skin grazes the cold metal, a violent shudder rips through the timber.\n\nThe door convulses in visceral disgust, as if your very touch were a searing poison. Before you can even pull your hand back, the wood recoils with a deafening CRACK and slams shut against its frame with terrifying force. The living orchid tendrils wither instantly, turning to ash, and the glowing emerald light of the runes snaps out, plunging the threshold back into dead, unyielding shadow.\n\nA crushing, suffocating wave of shame and regret crashes down upon you, heavy enough to drop you to your knees. It radiates from that deep, throbbing pulse in your belly, burning through your chest like liquid lead.\n\nThe harsh, undeniable truth settles in your mind with agonizing clarity: you are already too filthy to cross this threshold. The dark, untamed desire coiling within your core has stained you, making your soul too heavy, your lust too high, to ever step into a place of untainted purity. The green door has rejected you—and it will not open again."
             },
             onFail: {
               next: "THE_GARDEN",
@@ -656,34 +656,11 @@
             type: "neutral",
             icon: "○",
             text: "The Red door is calling you. It wants you to come closer. You feel like you are being pulled towards it.",
-            successChance: 75,
+            successChance: 100,
             onSuccess: {
               next: "THE_FOREST_OF_DESIRE",
-              statDelta: 0,
-              log: null
-            },
-            onFail: {
-              next: "THE_MOCKING_OF_DARNKESS",
-              statDelta: -3,
-              log: "You try your hardest but you just cant remember anything. You were sure it was something important..."
-            }
-          },
-          {
-            id: "placeholder_choice_gate",
-            type: "type-b",
-            icon: "⛒",
-            text: "Choose none and ignore the doors",
-            difficultyLabel: "Erfordert Stat ≥ 50",
-            requiresStat: 50,
-            onSuccess: {
-              next: "THE_MOCKING_OF_DARNKESS",
-              statDelta: 0,
-              log: null
-            },
-            onFailRequirement: {
-              next: "PROLOG",
-              statDelta: -5,
-              log: "-5 Lust\nThe Doors vanish and you are left in the darkness. You feel a sense of despair wash over you. You realize that you have failed to make a choice and are now trapped in the darkness...."
+              statDelta: 15,
+              log: "+15 Lust\nYou step across the threshold into the shifting, vibrant glow of the red door, and the moment your weight shifts, a wave of intoxicating warmth floods your veins. The colors swirl around you, bathing your skin in a soft, seductive light that makes your pulse race and your breath catch in your throat.\n\nThe air is thick with a heady, almost electric energy that seems to hum in harmony with the deep, pulsing ache in your belly. Every nerve in your body tingles with anticipation, as if the very fabric of reality is bending to your desire.\n\nAs you move forward, the world around you begins to dissolve into a kaleidoscope of sensation. The ground beneath your feet feels impossibly soft and yielding, like walking on clouds infused with warmth and light. The air carries a subtle fragrance of exotic spices and blooming flowers, wrapping around you like a lover's embrace.\n\nYou feel an irresistible pull toward the heart of this shifting paradise, as if the very essence of desire itself is guiding you forward. The more you step into the glow, the more alive you feel—every thought, every sensation amplified to an almost unbearable intensity.\n\nAnd as you reach out to touch the shimmering surface of the door, a voice whispers in your mind, soft and sultry: \"Come closer... let go... surrender to what you truly crave...\"\n\nYou are drawn inexorably toward it, unable to resist the magnetic allure of the unknown pleasures that await beyond."
             }
           }
         ]
