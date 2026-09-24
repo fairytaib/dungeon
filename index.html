@@ -343,7 +343,7 @@ const SCENES = {
       },
       // After Prolog Choices
       "SLEEP": {
-        title: "SLEEP",
+        title: "Deep Sleep",
         baseText: "Sleep washes over you, carrying you from one darkness into the next. It is not the soft, restorative slumber of a weary traveller, but a slow sinking into endless expanses of black nothingness. There are no colors here, no voices, no phantom shapes drifting through the ether. You aren’t dreaming—or at least, you can’t remember doing so. There is only the long, featureless passage of time, stretching until the very concept of a minute or an hour loses all meaning.\n\nSo you wait to wake up…\n\nYou wait for the sudden return of breath, for the weight of your eyelids to yield, for the harsh reality of morning to break through the veil.\n\nBut you don’t.\n\nThe stillness remains unbroken. The quiet grows heavier, thicker, until a cold, creeping doubt begins to coil around the edges of your mind.\n\nDid you really fall asleep? Could you even have fallen asleep in a place like this?\n\nEverything that happened earlier didn’t exactly seem like a dream. The suffocating weight of the air, that cruel, echoing laughter that rattled your very soul, the sudden, searing agony near your navel—it was all too vivid, too sharp, too viscerally real. Dreams fade; they blur at the edges. But the memory of that blinding flash of light remains burned into your mind like a brand, raw and undeniable.\n\nIf you aren't asleep, then what is this timeless expanse holding you prisoner? And if you never truly went to sleep… what does that say about where you actually are?",
         thresholdTexts: [{
             min: 0,
@@ -399,6 +399,41 @@ const SCENES = {
               log: "+0 Lust.\nReally...? Did you seriously think that would work?\n\nYou snap your eyelids open with a surge of desperate hope, bracing yourself to finally shatter the illusion, to pierce through the veil and see whatever stone room, ancient cell, or twisted reality has been hiding from you all this time.\n\nYou stare ahead. You blink. You strain until the muscles around your eyes ache from the tension.\n\nYou see nothing.\n\nNot a single photon. Not a shadow, not a flicker, not even the faint, swimming phosphenes that usually dance across your vision in the dark. The void does not care that you opened your eyes; it renders the very act of sight completely meaningless. It is an absolute, heavy, mocking blankness that swallows your effort whole and spits back a wall of total emptiness.\n\nThe profound silliness of your own hope stings almost as much as the isolation. Opening your eyes in a place without light changes nothing. You are still trapped in the exact same endless, unyielding dark, forced to confront the frustrating truth that your senses are utterly useless here."
             }
           }
+        ]
+      },
+      "SLEEP_TWO": {
+        title: "Still Asleep",
+        baseText: "As the oppressive darkness continues to press in from all sides, you lose all sense of time.\n\nSeconds bleed seamlessly into hours, and hours dissolve into an endless, agonizing infinity. Without the rising of a sun, the ticking of a clock, or the simple rhythm of day and night, the void strips away your ability to measure your own existence. There is no past to anchor you, no future to anticipate—only the eternal, crushing now.\n\nYour breathing slows to a quiet, shallow drag. The heavy silence around you grows deafening, wrapping around your senses like a thick, suffocating shroud. The sharp ache near your navel dulls into a rhythmic, hypnotizing throb, pulsing in tandem with the vast nothingness that enfolds you.\n\nYour eyelids grow impossibly heavy, weighted down by an all-consuming exhaustion that seeps directly into your soul. You stop fighting the cold air. You stop searching the pitch-black air for answers that refuse to come. Floating in the absolute quiet, you simply surrender, letting your consciousness drift around.",
+        thresholdTexts: [{
+            min: 0,
+            max: 34,
+            text: ""
+          },
+          {
+            min: 35,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 100,
+          tag: "",
+          text: ""
+        },
+        choices: [
+          {
+            id: "placeholder_choice_b",
+            type: "type-b",
+            icon: "◆♥",
+            text: "Wonder who you are",
+            difficultyLabel: "Mindful",
+            successChance: 1,
+            onSuccess: {
+              next: "WHO_YOU_ARE",
+              statDelta: 5,
+              log: "+5 Lust.\nWith nowhere else to go and no physical world to touch, you turn your gaze inward. You retreat from the endless, suffocating blackness, withdrawing your awareness into the silent, cavernous depths of your own mind.\n\nDeeper and deeper you sink, descending through layers of forgotten memories, quiet fears, and silent thoughts, plunging into the core of your existence. Down here, beneath the noise of panic and confusion, the void feels different—less like an ocean that threatens to drown you, and more like a quiet, expectant canvas.\n\nSlowly, deliberately, you open your eyes.\n\nDirectly in front of you, coalescing out of the swirling mist of your own mind, a mirror materializes. It hangs suspended in the absolute dark, its surface framed in delicate, shimmering frost that pulses with a faint, otherworldly light.\n\nYou step forward—or rather, your consciousness drifts closer—to stare into the glass.\n\nThe reflection staring back at you is undeniably yours, yet entirely unrecognizable. The features are fluid, shifting slightly like water under a gentle breeze. You do not see a weathered face forged by past triumphs, nor a visage worn down by old regrets. There are no scars, no familiar lines, no history written in the contours of your skin.\n\nWhat you see in the glass is a clean slate—a reflection of something raw, elemental, and unfinished. It is the image of a soul that has not yet chosen its shape, a vessel standing at the absolute precipice of creation. It does not know who it was, nor what it is meant to become.\n\nAs you lock eyes with your own fluid reflection, a quiet, profound truth resonates through the glass: you are nothing yet... which means you can become anything."
+            },
+          },
         ]
       },
       // After SLEEP Choices
