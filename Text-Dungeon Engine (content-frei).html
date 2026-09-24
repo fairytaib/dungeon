@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Text-Dungeon-Crawler // Engine</title>
+  <title>The Dungeon</title>
   <style>
     :root {
       --bg: #0c0a12;
@@ -313,11 +313,11 @@
   <div id="app">
     <header>
       <div class="title-row">
-        <span class="game-title">Dungeon Engine</span>
-        <span class="room-name" id="roomName">—</span>
+        <span class="game-title">Chapter One</span>
+        <span class="room-name" id="roomName">Khalisi</span>
       </div>
       <div class="meter-label">
-        <span id="meterLabel">Stat A</span>
+        <span id="meterLabel">Lust</span>
         <span id="meterValue">0 / 100</span>
       </div>
       <div class="meter-track">
@@ -388,7 +388,7 @@
 
       "PROLOG": {
         title: "Prolog",
-        baseText: "Nothing\nNothing but darkness surrounds you.\nYou wonder Who you are and where you at?\nAnd just as you think those thoughts it feels like the darkness is laughing at you devilishly.\nYou try to look around but to no avail... There must be SOMETHING her...\nARGH\nA slight twinge near your belly button makes you flinch. You look down and, for a brief moment, it seems like...\n There was a flash of light. You were sure you saw it. Like some kind of... strange pattern.",
+        baseText: "The abyss does not merely exist; it breathes. It wraps around you like a shroud of frozen velvet, heavy and absolute, pressing against your chest until even the air in your lungs feels borrowed. There is no horizon here, no floor, no ceiling—only a suffocating, pitch-black infinity that swallows every sense whole.\n\nWho are you?\nThe question forms in the quiet corners of your mind, fragile and small. Where are you?\nNo sooner do the thoughts surface than the silence begins to warp. It starts as a low, vibrating hum deep within the dark, twisting into something cruel, echoing from everywhere and nowhere at once. It is not a sound you hear with your ears, but a mockery felt in the marrow of your bones—a cold, devilish laughter that delights in your ignorance. The darkness isn't just an absence of light; it is an observer. Watching. Waiting.\nYou strain your eyes, sweeping your gaze through the endless void, desperate to anchor yourself to anything. A wall, a stone, a shadow darker than the rest—there must be something here. A void this heavy cannot simply be empty.\nARGH!\nA sharp, fiery twinge flares near your belly button, tearing through you like a needle of molten glass. You flinch, doubling over as the sudden spike of agony shatters the paralysis holding you captive. Hands instinctively flying toward your stomach, you look down into the shadow—and for the briefest, heart-stopping fraction of a second, the void breaks.\nA blinding flash of luminescence tears through the gloom, blazing directly beneath your fingertips. It isn't a simple flame or a random spark. It is an intricate, violent geometry—a strange, web-like pattern carved in searing radiance that pulses once, violently, against your skin before vanishing back into the hungry dark.\nThe light is gone as quickly as it arrived, leaving behind the afterimage burned onto your retinas and the lingering heat on your skin. But the dark is no longer featureless. Now, you know it holds secrets—and whatever carved that mark into you has just begun to awaken.",
         thresholdTexts: [{
             min: 70,
             max: 75,
@@ -411,52 +411,53 @@
             icon: "◆",
             text: "Touch your belly",
             difficultyLabel: "Curiosity",
-            successChance: 0.40,
+            successChance: 40,
             onSuccess: {
-              next: "THE_DREAMLAND",
+              next: "SLEEP",
               statDelta: 1,
-              log: "+1 Lust.\n\nThis feels like a dream but you are not sure"
+              log: "+1 Lust.\n\nYour hand trembles as you press your fingers against your stomach, desperately searching for the origin of that blinding spark. The fabric of your clothes feels strangely thin beneath your palm—cold, damp, and clinging to your skin like a second layer of dead weight.\n\nAt first, there is only the lingering ache, a dull and thrumming heat pulsing beneath your flesh. But as you apply pressure, a sudden, sharp sensation shoots through your nervous system. It isn't just pain—it is a physical jolt, a current of crackling energy that leaps from your skin straight into your fingertips.\n\nYou trace the area with careful, agonizing precision. Beneath your skin, the flesh feels unnaturally warm, almost feverish compared to the icy abyss around you. And then your fingertips catch on something impossible.\n\nLines. Fine, raised ridges carved into your skin, forming a precise, geometric topography that shouldn't exist on a human body. As you run your hand along the contours, the mark responds to your touch. A faint, ethereal glow bleeds through your fingers, casting a pale, violet light across your knuckles and revealing the faint mist of your breath in the freezing air.\n\nThe pattern is intricate—a series of sharp, interlocking runes and spiraling lines that hum with an ancient, restless power. With every heartbeat, the raised skin twitches, expanding and contracting like something alive, feeding on your breath, anchoring itself deeper into your core.\n\nThe devilish laughter in the darkness instantly dies down, replaced by a heavy, suffocating stillness. The void is no longer just watching you. It is watching the mark. And as the strange pattern continues to pulse softly beneath your palm, you realize with terrifying clarity that this light isn't a beacon of hope—it is a key, and whatever it unlocks has just begun to turn."
             },
             onFail: {
               next: "SLEEP",
               statDelta: -1,
-              log: "-1 Lust.\n\nYou pass out. And as you wake up you wonder what a strange dream that was..."
+              log: "-1 Lust.\n\nYour hand trembles as you press your fingers against your stomach, desperately searching for the origin of that blinding spark, but you feel nothing.\n\nThere is no raised mark, no jagged wound, no residual heat beneath your skin—only the flat, numb reality of your own body through the coarse fabric of your clothes. The agony that tore through you just a second ago has evaporated completely, leaving behind an unsettling, hollow emptiness that feels almost worse than the pain.\n\nYou slide your hands back and forth, frantically pressing deeper into your flesh, searching for a scar, a pulse, a trace of whatever had burned so brightly behind your eyelids. Nothing. It is as though your own nervous system is playing tricks on you, betraying your senses in this featureless expanse.\n\nWas it a hallucination? A dying spark of a frantic mind trying to fabricate light where none exists?\n\nThe darkness seems to swell in response to your confusion, leaning in closer, heavier. The silence stretches, taut and mocking, as if the void itself is amused by your desperation—watching you claw at your own skin in pursuit of a phantom. You are left standing in the freezing, absolute quiet, unsure if you can even trust the testimony of your own eyes, with nothing to hold onto except the lingering, terrifying doubt that you might truly be losing your mind..."
             }
           },
           {
             id: "placeholder_choice_b",
             type: "type-b",
-            icon: "◆",
+            icon: "♥",
             text: "Try to remember the symbol",
             difficultyLabel: "Mindful",
-            successChance: 0.4,
+            successChance: 35,
             onSuccess: {
-              next: "SLEEP",
+              next: "WHO_YOU_ARE",
               statDelta: 10,
-              log: "+10 Lust.\n\nIt was A delicate,sigil-like marking traced in faded obsidian and muted rose gold, nestled just above the curve of the hip and fading toward the center of the abdomen.\nThe mark resembles a stylized, inverted crescent moon interwoven with thorny, thorned vines that taper off into fine, ink-like wisps against the skin.\nBeneath low light, the inner linework catches a faint, bioluminescent shimmer—less like a tattoo and more like an ancient scar born of velvet and starlight.\nIt pulses with a soft, imperceptible warmth, serving as a subtle, captivating emblem of innate allure and quiet power.\nYou somehow feel like you should note yourself the letter 'S'\nYou pass out. Everything turns black again"
+              log: "+10 Lust.\n\nIt was A delicate,sigil-like marking traced in faded obsidian and muted rose gold, nestled just above the curve of the hip and fading toward the center of the abdomen.\nThe mark resembles a stylized, inverted crescent moon interwoven with thorny, thorned vines that taper off into fine, ink-like wisps against the skin.\nBeneath low light, the inner linework catches a faint, bioluminescent shimmer—less like a tattoo and more like an ancient scar born of velvet and starlight.\nIt pulses with a soft, imperceptible warmth, serving as a subtle, captivating emblem of innate allure and quiet power."
             },
             onFail: {
               next: "SLEEP",
               statDelta: -3,
-              log: "-3 Lust.\n\nYou try your hardest but you just cant remember anything. You were sure it was something important... but you cant remember.\nAll that thinking has worn you out, and in the end, you fall asleep..."
+              log: "-3 Lust.\n\nYou strain your mind, desperately clawing at the fringes of your memory, trying to drag a single coherent thought out of the haze. There was something—something monumental, a truth so vital that the failure to grasp it feels like a physical ache in your chest. A name, a face, a warning, a purpose... it dances just beyond the reach of your thoughts, an elusive shadow taunting you from the fog.\n\nThe harder you push, the more violently your mind rebels. The thoughts fray at the edges, dissolving into fragmenting echoes before you can wrap your sanity around them. The effort is exhausting. A crushing, bone-deep weariness settles over your limbs, heavy as iron and cold as the void itself. Your eyelids feel weighted, each breath drawing in air that seems to grow thicker, slower, pulling you down into an irresistible undertow.\n\nThe quiet of the dark shifts from hostile to seductive, whispering a promise of release. Fighting it is like trying to hold back the tide with bare hands. Your knees give out, though you cannot tell if you fall onto stone, earth, or empty air.\n\nYour vision blurs, the faint, phantom afterimages of light finally snuffed out by an overwhelming lethargy. You let go of the memory. You let go of the fear. As your eyes drift shut, the cruel laughter of the abyss fades into a soft, rhythmic lullaby, dragging you down into a deep, dreamless sleep."
             }
           },
           {
             id: "placeholder_choice_neutral",
             type: "neutral",
-            icon: "○",
+            icon: "◆",
             text: "Just go back to sleep",
-            successChance: 1,
+            difficultyLabel: "Simple",
+            successChance: 100,
             onSuccess: {
               next: "SLEEP",
               statDelta: -2,
-              log: "-2 Lust.\n\nYou dont care and you dont want to know. You just want to sleep"
+              log: "-2 Lust.\n\nA profound, cold apathy washes over you, drowning out the fear, the pain, and the frantic questions. You simply do not care. Who you were, where you are, why the darkness mocks you, or what that fleeting burst of light meant—none of it matters. The endless pursuit of answers feels like a fool's errand, an exhausting game you have no desire to play.\n\nYou surrender to the heaviness dragging at your limbs. The void, once so terrifyingly vast, transforms into a weightless blanket, wrapping around your shoulders and pressing softly against your tired eyes. You don't want to fight the shadows; you want to dissolve into them.\n\nYou let your body go limp, sinking into the quiet emptiness. The devilish laughter of the dark grows muffled and distant, as if retreating into the background of a dream you refuse to take part in. You close your eyes, shutting out the last lingering thoughts of the strange pattern, the pain, and the unknown world waiting beyond.\n\nBreathing out a long, slow sigh, you let the dark take you, turning your back on the mystery and choosing the soft, undisturbed silence of sleep."
             }
           },
           {
             id: "placeholder_choice_gate",
             type: "type-b",
-            icon: "⛒♥",
+            icon: "♥",
             text: "Start to masturbate",
             difficultyLabel: "Needs 'Lust' >= 50",
             requiresStat: 50,
@@ -466,7 +467,7 @@
             onFailRequirement: {
               next: "SLEEP",
               statDelta: 0,
-              log: "+0 Lust.\nThe moment you try to touch yourself, you realize that you are not even sure if you have a body. You feel like you are just a consciousness floating in the void. You cant even feel your own body. You are not sure if you even have a body.\nYou pass out. Everything turns black again."
+              log: "+0 Lust.\nYou reach down, intent on pressing your fingers against your flesh—only to encounter an impossible, sickening sensation of absolute nothingness.\n\nThere is no resistance. No friction of fabric, no warmth of skin, no firm contour of a torso. In fact, as you focus inward, the very concept of arms, fingers, and a chest begins to unravel. You try to twitch a finger, to bend a knee, to feel the steady thrum of a heart in your ribs, but your commands echo into a hollow vacuum.\n\nA chilling realization paralyzes your thoughts: you aren't actually touching anything because there is nothing *to* touch. You have no skin, no bone, no form. You are not a person standing in a dark room; you are merely a lingering spark of awareness, a disembodied consciousness drifting weightlessly through an endless ocean of nothingness. The memory of having a body feels like an old story you once heard, a phantom sensation fading faster than mist in the morning sun.\n\nWithout physical lungs, your sudden panic has nowhere to go. Without a throat, you cannot scream. The terrifying abstractness of existing as a phantom mind in a physical void shatters the fragile anchor holding your thoughts together.\n\nThe weight of the infinity pressing in from every side grows too immense for a mind without a shell to bear. The edges of your awareness begin to fray and unravel. The faint, ghostly concept of yourself dissolves, and the blinding horror gives way to a merciful, crushing numbness.\n\nYour consciousness collapses inward, folding into itself, and the oppressive dark swallows the last flickering fragment of who you were, plunging you back into the absolute, silent black."
             }
           }
         ]
@@ -474,22 +475,22 @@
       // After Prolog Choices
       "SLEEP": {
         title: "SLEEP",
-        baseText: "Sleep washes over you and carries you from one darkness into the next. Endless expanses of black nothingness.\nYou aren’t dreaming—or at least, you can’t remember doing so. So you wait to wake up…\nBut you don’t…\nDid you really fall asleep? Could you even have fallen asleep? Everything that happened earlier didn’t exactly seem like a dream[...]\n.",
+        baseText: "Sleep washes over you, carrying you from one darkness into the next. It is not the soft, restorative slumber of a weary traveller, but a slow sinking into endless expanses of black nothingness. There are no colors here, no voices, no phantom shapes drifting through the ether. You aren’t dreaming—or at least, you can’t remember doing so. There is only the long, featureless passage of time, stretching until the very concept of a minute or an hour loses all meaning.\n\nSo you wait to wake up…\n\nYou wait for the sudden return of breath, for the weight of your eyelids to yield, for the harsh reality of morning to break through the veil.\n\nBut you don’t.\n\nThe stillness remains unbroken. The quiet grows heavier, thicker, until a cold, creeping doubt begins to coil around the edges of your mind.\n\nDid you really fall asleep? Could you even have fallen asleep in a place like this?\n\nEverything that happened earlier didn’t exactly seem like a dream. The suffocating weight of the air, that cruel, echoing laughter that rattled your very soul, the sudden, searing agony near your navel—it was all too vivid, too sharp, too viscerally real. Dreams fade; they blur at the edges. But the memory of that blinding flash of light remains burned into your mind like a brand, raw and undeniable.\n\nIf you aren't asleep, then what is this timeless expanse holding you prisoner? And if you never truly went to sleep… what does that say about where you actually are?",
         thresholdTexts: [{
             min: 0,
-            max: 25,
-            text: ""
+            max: 34,
+            text: "Deep within the hollow void, a low, rhythmic vibration begins to build. It is not something you hear, but something you feel—a slight, unmistakable twinge in your belly, pulsing with the slow, steady tempo of a sleeping heart.\n\nThump... thump... thump...\n\nWith every subtle throb, a strange, hollow ache blooms in the center of your being. It isn't just physical pain; it is a profound, gnawing sensation of absence. A phantom limb of the soul. You feel with absolute, agonizing certainty that you are incomplete—that a piece of you, something vital and foundational, has been ripped away and scattered across the dark.\n\nYou reach inward, clawing through the fog of your mind to name what is gone. Is it a memory? A name? A face? A purpose? Or perhaps a power that once belonged to you?\n\nThe harder you try to grasp it, the more elusive it becomes, sliding through your mental fingers like smoke. You are a puzzle with its most critical piece missing, left to pulse softly in the quiet dark, haunted by the terrifying knowledge of your own emptiness."
           },
           {
             min: 35,
             max: 100,
-            text: ""
+            text: "Slowly, terrifyingly, the pieces begin to slide into place. The fog in your mind recedes just enough to reveal a jagged, undeniable realization.\n\nThis place is not a dream. You are not dreaming. You are not asleep, nor are you awake. You exist in the terrifying twilight between states, anchored to a reality far stranger than any nightmare. This endless expanse, this weightless void, the burning pattern, the cruel laughter—it all makes a horrifying kind of sense now. That's your...\n\nSuddenly, the fabric of your perception tears open with a deafening, violent screech.\n\nThe very air around you fractures, splintering into static and jagged lines of raw, blinding light. The thoughts in your head are ripped away mid-sentence, replaced by a cold, mechanical intrusion that reverberates directly through your soul:\n\n[ERROR — THE PLAYER IS NOT YET READY FOR THE TRUTH]\n\n[CENSORSHIP OF THE TRUTH]\n\nYou try to fight it, to cling to the fleeting revelation that was just within your grasp, but the invisible force strikes again, heavier this time, wiping your thoughts clean like slate under a wet rag.\n\n[ERROR — THE PLAYER IS NOT YET READY FOR THE TRUTH]\n\n[CENSORSHIP OF THE TRUTH]\n\nA high-pitched, unbearable ringing fills the void, drowning out the last remnants of your sanity. The revelation is violently torn from your mind, sealed away behind an impenetrable wall of static and silence.\n\n[ERROR — THE PLAYER IS NOT YET READY FOR THE TRUTH]\n\n[CENSORSHIP OF THE TRUTH]\n\n[ERROR — THE PLAYER IS NOT YET READY FOR THE TRUTH]\n\n[CENSORSHIP OF THE TRUTH]\n\nThe noise cuts out instantly, leaving behind a silence far more terrifying than before. The truth was right there—glowing, perfect, and absolute. But something, or someone, just slammed the door in your face, leaving you reeling in the dark, stripped of the one answer that could have saved you."
           }
         ],
         hiddenThought: {
-          unlockAt: 60,
-          tag: "[LABEL]",
-          text: "[VERBORGENER GEDANKE]"
+          unlockAt: 100,
+          tag: "",
+          text: ""
         },
         choices: [{
             id: "placeholder_choice_a",
@@ -501,7 +502,7 @@
             onSuccess: {
               next: "SLEEP",
               statDelta: 1,
-              log: "You try to feel around but you realize you cant even walk around? You try to feel your way forward, but realize you can't even move? Not because you're chained down, but because your feet can't find any footing—it's as if there's nothing around you.\nAfter a while, you realize that there's nothing you can do. You're powerless...\n"
+              log: "+1 Lust.\nYou strain against the suffocating silence, desperate to take even a single step forward, to stretch out a hand and anchor yourself to something—anything. You reach out into the blackness, expecting stone, dirt, or perhaps the cold surface of a wall.\n\nNothing.\n\nYou shift your weight, attempting to place one foot in front of the other, but your legs find no resistance. There is no floor beneath you, no ceiling above, no walls at your sides. You aren't being held down by iron shackles or bound by heavy ropes; the reality is far more terrifying. You cannot move simply because the universe around you lacks the basic geometry to allow it. You are suspended in a realm devoid of direction, floating in an absolute, featureless medium where forward, backward, up, and down have ceased to exist.\n\nYou try again, kicking out, reaching desperately with phantom limbs, but your efforts yield only a sickening sense of vertigo. It is like swimming through vacuum, every movement swallowed instantly by the vast, unyielding nothingness.\n\nMinutes drag into hours, or perhaps days—time itself feels meaningless here. Gradually, the violent panic surging through your veins burns down into a quiet, icy hollow in your chest.\n\nA heavy, crushing realization settles over you: there is nothing you can do. No effort of will, no surge of strength, no desperate struggle can force the void to yield. You are completely, utterly powerless, left to drift in an ocean of static dark, a prisoner to an emptiness that refuses to let you go.\n"
             },
           },
           {
@@ -513,8 +514,8 @@
             successChance: 1,
             onSuccess: {
               next: "WHO_YOU_ARE",
-              statDelta: 10,
-              log: "You sink deep inside yourself.\nDeeper and deeper\nYou open up your eyes"
+              statDelta: 5,
+              log: "+5 Lust.\nWith nowhere else to go and no physical world to touch, you turn your gaze inward. You retreat from the endless, suffocating blackness, withdrawing your awareness into the silent, cavernous depths of your own mind.\n\nDeeper and deeper you sink, descending through layers of forgotten memories, quiet fears, and silent thoughts, plunging into the core of your existence. Down here, beneath the noise of panic and confusion, the void feels different—less like an ocean that threatens to drown you, and more like a quiet, expectant canvas.\n\nSlowly, deliberately, you open your eyes.\n\nDirectly in front of you, coalescing out of the swirling mist of your own mind, a mirror materializes. It hangs suspended in the absolute dark, its surface framed in delicate, shimmering frost that pulses with a faint, otherworldly light.\n\nYou step forward—or rather, your consciousness drifts closer—to stare into the glass.\n\nThe reflection staring back at you is undeniably yours, yet entirely unrecognizable. The features are fluid, shifting slightly like water under a gentle breeze. You do not see a weathered face forged by past triumphs, nor a visage worn down by old regrets. There are no scars, no familiar lines, no history written in the contours of your skin.\n\nWhat you see in the glass is a clean slate—a reflection of something raw, elemental, and unfinished. It is the image of a soul that has not yet chosen its shape, a vessel standing at the absolute precipice of creation. It does not know who it was, nor what it is meant to become.\n\nAs you lock eyes with your own fluid reflection, a quiet, profound truth resonates through the glass: you are nothing yet... which means you can become anything."
             },
           },
           {
@@ -526,23 +527,7 @@
             onSuccess: {
               next: "SLEEP",
               statDelta: 0,
-              log: "Really...? Did you seriously think that would work?\nYou see nothing..."
-            }
-          },
-          {
-            id: "placeholder_choice_gate",
-            type: "type-b",
-            icon: "⛒",
-            text: "[FINALE OPTION — Beispiel für hartes Gate]",
-            difficultyLabel: "Erfordert Stat ≥ 50",
-            requiresStat: 50,
-            onSuccess: {
-              ending: "ending_a"
-            },
-            onFailRequirement: {
-              next: "PLACEHOLDER_SCENE",
-              statDelta: 0,
-              log: "[TEXT BEI NICHTERFÜLLTER VORAUSSETZUNG]"
+              log: "+0 Lust.\nReally...? Did you seriously think that would work?\n\nYou snap your eyelids open with a surge of desperate hope, bracing yourself to finally shatter the illusion, to pierce through the veil and see whatever stone room, ancient cell, or twisted reality has been hiding from you all this time.\n\nYou stare ahead. You blink. You strain until the muscles around your eyes ache from the tension.\n\nYou see nothing.\n\nNot a single photon. Not a shadow, not a flicker, not even the faint, swimming phosphenes that usually dance across your vision in the dark. The void does not care that you opened your eyes; it renders the very act of sight completely meaningless. It is an absolute, heavy, mocking blankness that swallows your effort whole and spits back a wall of total emptiness.\n\nThe profound silliness of your own hope stings almost as much as the isolation. Opening your eyes in a place without light changes nothing. You are still trapped in the exact same endless, unyielding dark, forced to confront the frustrating truth that your senses are utterly useless here."
             }
           }
         ]
@@ -550,40 +535,192 @@
       // After SLEEP Choices
       "WHO_YOU_ARE": {
         title: "What is inside",
-        baseText: "You look around, and not much has really changed. The blackness around you is just as dark as before. But this time, something is different.\nThree doors have suddenly appeared in front of you.\nA green birchwood door adorned with emerald-colored diamonds and enchanting tendrils of delicate orchid blossoms. The word “Hijabi” is written on it in gently curving letters.\nNext to it, barely visible, standing in the middle, is a black door. No decorations or flourishes—just a small, gold-inlaid round doorknob set into the door.\nOn the very outside is a door that’s fiery red… now a beguiling shade of purple… and now a sea-blue door. The door continuously shifts its colors into very pleasant, alluring shades. In its center, as if nothing else had ever been there, stands the word “Whore.",
+        baseText: "You look around, and on the surface, not much has really changed. The suffocating blackness around you is just as dark as before, pressing against your skin with the same absolute, freezing weight. But this time, something fundamental in the air has shifted—a subtle, humming vibration that makes the hair on your arms stand on end.\n\nOut of the featureless void, three distinct structures bleed into reality, standing shoulder-to-shoulder directly in front of you.\n\nTo the left stands a door carved from vibrant green birchwood, its polished surface grain shimmering with an inner vitality. Intricate, emerald-colored diamonds are inlaid along its border, framed by enchanting, living tendrils of delicate orchid blossoms that creep across the frame. Near its center, the word “Hijabi” is inscribed in gently curving, elegant script that radiates a soft, tranquil light.\n\nIn the middle, standing so quiet and unobtrusive it is barely visible against the surrounding abyss, is a door of absolute black. It possesses no decorations, no elaborate carvings, no grandiose flourishes—just a stark, flawless slab of dark timber. Its only distinguishing feature is a small, pristine gold-inlaid round doorknob set firmly into its center, gleaming faintly like a solitary star in a dead sky.\n\nOn the far right stands a door that defies fixed form, constantly caught in a hypnotic, mesmerizing transformation. One moment it glows with a fierce, fiery red, burning like embers; the next, it bleeds into a deep, beguiling shade of royal purple, before smoothly cascading into a tranquil, oceanic sea-blue. It continuously shifts through these pleasant, alluring shades, pulling at your gaze with a strange, magnetic warmth. Set directly in its center, fixed and unmoving while the colors swirl around it, stands a single, brazen word: “Whore.”\n\nThe void falls silent once more, leaving you staring at the three impossible thresholds, each promising a radically different path forward into the unknown.",
         thresholdTexts: [{
             min: 0,
-            max: 49,
-            text: "Ein kleines ziehen zieht sich durch deinen Bauch"
+            max: 30,
+            text: "A gentle, persuasive warmth blooms deep in your abdomen—a subtle, irresistible tugging sensation that seems to coil right behind your navel. It is not the violent, tearing agony from before, but a soft, rhythmic pulse that resonates through your core like a distant harp string.\n\nIt draws your focus irresistibly toward the green birchwood door.\n\nWith every breath you take, the magnetic pull grows stronger, washing over your frayed nerves like a soothing salve. The delicate orchids trailing along its frame seem to unfurl slightly in response, casting a tranquil, emerald-hued aura across the surrounding void. The word “Hijabi” glows with a quiet, welcoming serenity that promises shelter, dignity, and a profound sense of inner peace.\n\nIt feels... good. Safe. Like a gentle hand reaching out to guide a lost soul home, coaxing you to leave the cold blackness behind and step through its verdant threshold."
           },
           {
-            min: 50,
+            min: 31,
             max: 100,
-            text: "A slight tugging sensation runs through your stomach. It feels... good"
+            text: "A deep, intoxicating heat ignites in your abdomen, sending a subtle yet electrifying tug through your core. It isn't the sharp, agonizing burn from before, but a slow, seductive thrum that ripples outward, making your pulse race in the heavy quiet of the void.\n\nIt draws your gaze irresistibly toward the shifting, vibrant door on the far right.\n\nAs the colors cascade from fiery red to deep purple and ocean blue, the magnetic pull tightens its hold, humming in harmony with that pulsing knot in your stomach. The shifting shades seem to reach out into the blackness, promising freedom, abandon, and a complete surrender to desire. The word carved into its center glows with a brazen, mesmerizing intensity, daring you to stop holding back.\n\nIt feels... good. Thrilling. A dark, velvet temptation that beckons you to abandon caution, step into the hypnotic glow, and lose yourself in whatever lies beyond."
           }
         ],
         hiddenThought: {
-          unlockAt: 60,
-          tag: "[LABEL]",
-          text: "[VERBORGENER GEDANKE]"
+          unlockAt: 100,
+          tag: "",
+          text: ""
         },
         choices: [{
             id: "placeholder_choice_a",
             type: "type-a",
             icon: "◆",
-            text: "Go towards the green Door",
+            text: "Go towards the 'Hijabi' Door",
             difficultyLabel: "Purity",
-            successChance: 0.5,
+            successChance: 1,
             onSuccess: {
-              next: "THE_DREAMLAND",
-              statDelta: 1,
-              log: "This feels like a dream but you are not sure"
+              next: "ARE_YOU_SURE",
+              statDelta: -10,
+              log: "-10 Lust\nYou step toward the green door, and the moment your weight shifts toward it, a wave of profound, unbroken calm washes over your spirit. The suffocating weight of the dark begins to melt away, replaced by a gentle, cradling aura that wraps around you like a long-lost embrace.\n\nAs you close the distance, the door seems to visibly welcome you. The living tendrils of orchid blossoms unfurl further, releasing a soft, subtle fragrance of rain-washed earth and blooming flora into the void. The green birchwood shines with a deep, organic vitality, radiating a soothing warmth that permeates your chest and fills the hollow ache in your belly.\n\nA strange, quiet sense of familiarity settles over your thoughts. You might not remember your name or your past, but this threshold feels like a memory of home—a place of sanctuary, restraint, and untainted grace. It is kind, touching the rawest parts of your soul with a tenderness that silences every lingering fear and doubt.\n\nYou stand directly before the shimmering wood, staring at the gently glowing letters of “Hijabi.” You still cannot see what lies on the other side, but as you reach out to touch the frame, the uncertainty no longer terrifies you. Here, wrapped in this tranquil emerald light, you feel fundamentally safe, secure, and ready to step across."
+            },
+            
+          },
+          {
+            id: "placeholder_choice_b",
+            type: "type-b",
+            icon: "◆",
+            text: "Walk towards the unknown Door",
+            difficultyLabel: "Unknown",
+            successChance: 1,
+            onSuccess: {
+              next: "ARE_YOU_SURE",
+              statDelta: 0,
+              log: "+0 Lust\nYou step toward the black door, and with your very first stride, a sudden, ice-cold dread floods your veins.\n\nUnlike the soothing warmth or seductive heat of the others, this door radiates an ominous, unnatural gravity. The plain, featureless wood seems to vibrate, exuding a silent, suffocating fury. It doesn't rage outwardly—it screams at you with a terrifying, calm anger, a icy whisper echoing through the corridors of your mind, woven with mocking songs of absolute temptation. It promises nothing, yet demands everything.\n\nWith every heavy step you take toward that dark threshold, the surrounding reality begins to dissolve. The green door and its blooming orchids melt into the shadows. The shifting, colorful glow on the right snaps shut into utter darkness. The void itself shrinks away, collapsing inward until there is nothing left in existence except you, the cold expanse beneath your feet, and that solitary, gleaming gold doorknob.\n\nThe silence pressing against your eardrums grows deafening. The air turns paper-thin, tasting of old iron and static electricity.\n\nYou stand mere inches from the stark, unbending wood, staring at the cold gold knob waiting for your hand. Whatever lies beyond this threshold sits outside the boundaries of fate itself—a path so uncharted and dangerous that not even I know where this door leads to..."
+            },
+          
+          },
+          {
+            id: "placeholder_choice_neutral",
+            type: "neutral",
+            icon: "○",
+            text: "You walk towards the 'Whore' Door",
+            successChance: 1,
+            onSuccess: {
+              next: "ARE_YOU_SURE",
+              statDelta: 10,
+              log: "+10 Lust\nYou step toward the purple door, and the moment your momentum shifts, a sudden, intoxicating rush of pure excitement surges through your veins. The heavy, cold dread of the void evaporates, replaced by a feverish pulse that quickens your breath and sets your heart hammering against your ribs.\n\nAs you close the distance, the door shifts restlessly, its surface cascading through shades of deep royal violet, fiery crimson, and mesmerizing ocean blue. It seems to beckon you forward, casting a warm, flickering light across your skin that feels like a velvet touch in the dark. A strange, undeniable spark of curiosity ignites within you, pulling at your mind with an magnetic, almost illicit charm.\n\nThe threshold radiates a brazen, unapologetic energy. It tempts your thoughts, daring you to discard your hesitations, to strip away restraint, and to step blindly into the unknown for the sheer thrill of discovery. The word carved into its center glows brightly, no longer a label, but a promise of uninhibited freedom and raw experience.\n\nYou stand right at the edge of its hypnotic, shifting aura, suspended in a moment of electric anticipation. You have no idea what secrets, dangers, or pleasures await on the other side, but as you stare into the swirling colors, you feel profoundly intrigued, eager, and ready to yield to the temptation."
+            }
+          }
+        ]
+      }
+      ,
+      "ARE_YOU_SURE": {
+        title: "Are you sure?",
+        baseText: "The world around you shrinks until nothing remains except the solitary threshold standing before you. The surrounding air thickens, heavy with an absolute, breathless gravity.\n\nThe threshold seems to pause, vibrating with a quiet, expectant tension—as if the very fabric of existence is holding its breath, waiting for your final choice.\n\nThis is your last chance. The space behind you still lingers in the balance; you can still turn back, step away from the edge, and reconsider the other doors fading in the dim background of your mind. You can still choose a different path, a different destiny, a different version of yourself.\n\nBut the moment your hand reaches out, the moment your weight crosses this threshold, the lock will click into place. The path behind you will crumble into memory, and there will be no turning back. Whatever lies on the other side will claim you entirely.\n\nThe choice is yours, absolute and unyielding.\n\nAre you truly sure you want to go through this door?",
+        thresholdTexts: [{
+            min: 0,
+            max: 49,
+            text: ""
+          },
+          {
+            min: 50,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 60,
+          tag: "",
+          text: ""
+        },
+        choices: [{
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Open the green Door of Purity",
+            difficultyLabel: "Purity",
+            successChance: 25,
+            onSuccess: {
+              next: "THE_MOCKING_OF_DARNKESS",
+              statDelta: +3,
+              log: "+3 Lust\nAs your fingers extend toward the polished gold handle of the green birchwood door, the ambient air freezes. The tranquil scent of blooming flora instantly curdles into a sharp, acrid stench.\n\nThe moment your skin grazes the cold metal, a violent shudder rips through the timber.\n\nThe door convulses in visceral disgust, as if your very touch were a searing poison. Before you can even pull your hand back, the wood recoils with a deafening CRACK and slams shut against its frame with terrifying force. The living orchid tendrils wither instantly, turning to ash, and the glowing emerald light of the runes snaps out, plunging the threshold back into dead, unyielding shadow.\n\nA crushing, suffocating wave of shame and regret crashes down upon you, heavy enough to drop you to your knees. It radiates from that deep, throbbing pulse in your belly, burning through your chest like liquid lead.\n\nThe harsh, undeniable truth settles in your mind with agonizing clarity: you are already too filthy to cross this threshold. The dark, untamed desire coiling within your core has stained you, making your soul too heavy, your lust too high, to ever step into a place of untainted purity. The green door has rejected you—and it will not open again.
             },
             onFail: {
-              next: "SLEEP",
-              statDelta: 0,
-              log: "You pass out. And as you wake up you wonder what a strange dream that was..."
+              next: "THE_GARDEN",
+              statDelta: -25,
+              log: "-25 Lust\nYou step through the threshold, and as you open your eyes, the oppressive blackness of the void vanishes, replaced by a radiant, breathtaking sanctuary. You find yourself standing in the center of a beautiful, endless garden, bursting with vibrant flowers, towering emerald trees, and lush greenery that sways gently under a clear, sunlit sky. The air is warm, sweet, and fragrant with the scent of fresh rain and blooming jasmine, washing over you in a soft, soothing breeze.\n\nA profound sense of peace and tranquility surges through your chest. You take a deep, slow breath, letting the absolute serenity of this paradise fill every corner of your soul. For the first time since waking, the cold terror recedes. You feel at home—safe, whole, and protected.\n\nOr at least... most of your body does.\n\nDeep within your core, the illusion shatters. A low, sharp ache throbs near your navel, a cold and heavy knot that refuses to succumb to the warmth of the garden. The persistent, lingering pain in your belly stands as a grim, constant reminder of the darkness that still sleeps within you. No matter how pure the air is here, no matter how soft the grass feels beneath your feet, that corrupting ember remains unextinguished.\n\nA heavy, tragic certainty settles in your mind. You know you cannot stay in this paradise forever. The sanctuary may grant you a temporary respite, but the stain in your soul cannot be so easily washed away. Sooner or later, the darkness dormant in your belly will wake up—and it will pull you right back out into the cold, forgiving void."
+            },
+            
+          },
+          {
+            id: "placeholder_choice_b",
+            type: "type-b",
+            icon: "◆♥",
+            text: "Walk towards the black Door",
+            difficultyLabel: "Unknown",
+            successChance: 50,
+            onSuccess: {
+              next: "THE_MOCKING_OF_DARNKESS",
+              statDelta: 7,
+              log: "+7 Lust\nAs you step across the threshold into the abyssal quiet, the heavy timber of the black door snaps shut behind you, sealing away every lingering trace of light. Immediately, a suffocating, bone-chilling fear washes over you, far heavier and more suffocating than the stillness of the void before.\n\nThe absolute darkness seems to press against your skin like a physical weight, coiling around your throat and seeping into your chest.\n\nThen, it begins.\n\nA low, guttural murmur ripples through the featureless space, rising and falling in an unnatural rhythm. The darkness itself seems to mock you, twisting into phantom whispers that echo directly inside your skull. Soft, derisive laughter schisms the silence, rising from everywhere and nowhere at once, sneering at your foolishness, your helplessness, and your blind step into the unknown.\n\nEvery breath you take feels thin and hollow. You are completely exposed, stripped of control and vision, standing at the mercy of an unseen presence that savors your rising terror and feeds on your utter isolation."
+            },
+            onFail: {
+              next: "THE_FOREST_OF_DESIRE",
+              statDelta: 12,
+              log: "+12 Lust\nYou step across the threshold into the black void, and the moment your weight shifts, a sudden, hot feeling rushes through your veins like liquid fire, electrifying every nerve in your body.\n\nIn a breathtaking, explosive instant, the darkness ruptures into a paradise crafted entirely from raw, unbridled desire. Flowers and trees in vibrant, impossible colors bloom across a pristine landscape—whatever magnificent creation flickers through your mind instantly manifests before your eyes. The air is warm, thick, and intoxicatingly soft, filled with the aroma of food so rich and delicious you can taste its sweetness on the tip of your tongue.\n\nAll around you, the most stunning, breathtakingly beautiful people you have ever laid eyes upon glide through the scene, their gazes locking onto yours with undivided, smoldering focus.\n\nYou feel like you are immersed in a dream—a perfect, lucid fantasy where every rule is shattered, and reality bends entirely to your sovereign whim. The suffocating pressure that once weighed down your chest is gone, utterly swept away and replaced by a dizzying sense of absolute freedom and endless possibility.\n\nYou take a deep, shaky breath, feeling the heavy burden of your nameless past completely melt off your shoulders. For the first time in what feels like an eternity, you feel intensely, vibrantly alive, boundless and unchained, ready to conquer and explore this hedonistic new world without a trace of fear or hesitation.\n\nAnd as the intoxicating heat in your abdomen surges upward, claiming every inch of your being, one thing becomes undeniable, overwhelming, and utterly sure...\n\nYou are horny as fuck."
             }
+          },
+          {
+            id: "placeholder_choice_neutral",
+            type: "neutral",
+            icon: "○",
+            text: "The Red door is calling you. It wants you to come closer. You feel like you are being pulled towards it.",
+            successChance: 75,
+            onSuccess: {
+              next: "THE_FOREST_OF_DESIRE",
+              statDelta: 0,
+              log: null
+            },
+            onFail: {
+              next: "THE_MOCKING_OF_DARNKESS",
+              statDelta: -3,
+              log: "You try your hardest but you just cant remember anything. You were sure it was something important..."
+            }
+          },
+          {
+            id: "placeholder_choice_gate",
+            type: "type-b",
+            icon: "⛒",
+            text: "Choose none and ignore the doors",
+            difficultyLabel: "Erfordert Stat ≥ 50",
+            requiresStat: 50,
+            onSuccess: {
+              next: "THE_MOCKING_OF_DARNKESS",
+              statDelta: 0,
+              log: null
+            },
+            onFailRequirement: {
+              next: "PROLOG",
+              statDelta: -5,
+              log: "-5 Lust\nThe Doors vanish and you are left in the darkness. You feel a sense of despair wash over you. You realize that you have failed to make a choice and are now trapped in the darkness...."
+            }
+          }
+        ]
+      }
+      ,
+      // After ARE_YOU_SURE Choices
+       "THE_GARDEN": {
+        title: "The Garden",
+        baseText: "Seems like you chose your path. Send me a Screenshot so i can see your path and prepare chapter 2 accordingly",
+        thresholdTexts: [{
+            min: 0,
+            max: 49,
+            text: ""
+          },
+          {
+            min: 50,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 60,
+          tag: "",
+          text: ""
+        },
+        /* choices: [{
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Open the Hijabi Door",
+            difficultyLabel: "Purity",
+            successChance: 1,
+            onSuccess: {
+              next: "THE_DREAMLAND",
+              statDelta: -100,
+              log: ""
+            },
           },
           {
             id: "placeholder_choice_b",
@@ -631,9 +768,177 @@
               log: "[TEXT BEI NICHTERFÜLLTER VORAUSSETZUNG]"
             }
           }
-        ]
+        ]*/
+      } 
+      ,
+       "THE_FOREST_OF_DESIRE": {
+        title: "The Forest of Desire",
+        baseText: "Seems like you chose your path. Send me a Screenshot so i can see your path and prepare chapter 2 accordingly",
+        thresholdTexts: [{
+            min: 0,
+            max: 49,
+            text: ""
+          },
+          {
+            min: 50,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 60,
+          tag: "",
+          text: ""
+        },
+        /* choices: [{
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Open the Hijabi Door",
+            difficultyLabel: "Purity",
+            successChance: 1,
+            onSuccess: {
+              next: "THE_DREAMLAND",
+              statDelta: -100,
+              log: ""
+            },
+          },
+          {
+            id: "placeholder_choice_b",
+            type: "type-b",
+            icon: "◆♥",
+            text: "Walk towards the black Door",
+            difficultyLabel: "Unknown",
+            successChance: 0.5,
+            onSuccess: {
+              next: "THE_DREAMLAND",
+              statDelta: 10,
+              log: "[ERFOLGSTEXT B]"
+            },
+            onFail: {
+              next: "SLEEP",
+              statDelta: -3,
+              log: "You try your hardest but you just cant remember anything. You were sure it was something important..."
+            }
+          },
+          {
+            id: "placeholder_choice_neutral",
+            type: "neutral",
+            icon: "○",
+            text: "[NEUTRALE OPTION]",
+            successChance: 1,
+            onSuccess: {
+              next: "PLACEHOLDER_SCENE",
+              statDelta: 0,
+              log: null
+            }
+          },
+          {
+            id: "placeholder_choice_gate",
+            type: "type-b",
+            icon: "⛒",
+            text: "[FINALE OPTION — Beispiel für hartes Gate]",
+            difficultyLabel: "Erfordert Stat ≥ 50",
+            requiresStat: 50,
+            onSuccess: {
+              ending: "ending_a"
+            },
+            onFailRequirement: {
+              next: "PLACEHOLDER_SCENE",
+              statDelta: 0,
+              log: "[TEXT BEI NICHTERFÜLLTER VORAUSSETZUNG]"
+            }
+          }
+        ] */
       }
-
+      ,
+      "THE_MOCKING_OF_DARNKESS": {
+        title: "The Mocking of Darkness",
+        baseText: "Seems like you chose your path. Send me a Screenshot so i can see your path and prepare chapter 2 accordingly",
+        thresholdTexts: [{
+            min: 70,
+            max: 75,
+            text: ""
+          },
+          {
+            min: 76,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 100,
+          tag: "",
+          text: ""
+        },
+        /* choices: [{
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Touch your belly",
+            difficultyLabel: "Curiosity",
+            successChance: 40,
+            onSuccess: {
+              next: "THE_DREAMLAND",
+              statDelta: 1,
+              log: "+1 Lust.\n\nThis feels like a dream but you are not sure"
+            },
+            onFail: {
+              next: "SLEEP",
+              statDelta: -1,
+              log: "-1 Lust.\n\nYou pass out. And as you wake up you wonder what a strange dream that was..."
+            }
+          },
+          {
+            id: "placeholder_choice_b",
+            type: "type-b",
+            icon: "♥",
+            text: "Try to remember the symbol",
+            difficultyLabel: "Mindful",
+            successChance: 35,
+            onSuccess: {
+              next: "WHO_YOU_ARE",
+              statDelta: 10,
+              log: "+10 Lust.\n\nIt was A delicate,sigil-like marking traced in faded obsidian and muted rose gold, nestled just above the curve of the hip and fading toward the center of the abdomen.\nThe mark resembles a stylized, inverted crescent moon interwoven with thorny, thorned vines that taper off into fine, ink-like wisps against the skin.\nBeneath low light, the inner linework catches a faint, bioluminescent shimmer—less like a tattoo and more like an ancient scar born of velvet and starlight.\nIt pulses with a soft, imperceptible warmth, serving as a subtle, captivating emblem of innate allure and quiet power.\nYou somehow feel like you should note yourself the letter 'S'..."
+            },
+            onFail: {
+              next: "SLEEP",
+              statDelta: -3,
+              log: "-3 Lust.\n\nYou try your hardest but you just cant remember anything. You were sure it was something important... but you cant remember.\nAll that thinking has worn you out, and in the end, you fall asleep..."
+            }
+          },
+          {
+            id: "placeholder_choice_neutral",
+            type: "neutral",
+            icon: "◆",
+            text: "Just go back to sleep",
+            difficultyLabel: "Simple",
+            successChance: 100,
+            onSuccess: {
+              next: "SLEEP",
+              statDelta: -2,
+              log: "-2 Lust.\n\nYou dont care and you dont want to know. You just want to sleep"
+            }
+          },
+          {
+            id: "placeholder_choice_gate",
+            type: "type-b",
+            icon: "♥",
+            text: "Start to masturbate",
+            difficultyLabel: "Needs 'Lust' >= 50",
+            requiresStat: 50,
+            onSuccess: {
+              ending: "ending_a"
+            },
+            onFailRequirement: {
+              next: "SLEEP",
+              statDelta: 0,
+              log: "+0 Lust.\nThe moment you try to touch yourself, you realize that you are not even sure if you have a body. You feel like you are just a consciousness floating in the void. You cant even feel your own body. You are not sure if you even have a body.\nYou pass out. Everything turns black again."
+            }
+          }
+        ]*/
+      },
+      
     };
 
     /* ---------------------------------------------------------------------
@@ -645,7 +950,7 @@
         title: "[ENDING TITEL A]",
         text: "[ENDING TEXT A]"
       },
-      "ending_b": {
+      "BAD_ENDING": {
         title: "[ENDING TITEL B]",
         text: "[ENDING TEXT B]"
       }
@@ -812,13 +1117,14 @@
       if (choice.onSuccess && choice.onSuccess.ending && choice.successChance === undefined) {
         triggerEnding(choice.onSuccess.ending);
         return;
-        const target = (choice.successChance ? ? 1.0) + (state.stat / 100);
       }
 
-
       const roll = Math.random() * 100;
-      const target = (choice.successChance ? ? 1.0) + (state.stat / 100);
-      const success = roll <= target;
+      // successChance wird hier direkt als Prozentwert + Stat-Bonus (z.B. 0-100) gewertet
+      const chance = (choice.successChance + state.stat) ?? 1.0;
+      const success = roll <= chance;
+      
+      const outcome = success ? choice.onSuccess : choice.onFail;
       applyOutcome(outcome);
     }
 
