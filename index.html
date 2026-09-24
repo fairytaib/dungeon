@@ -1,390 +1,259 @@
 <!DOCTYPE html>
-<html lang="de">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>The Dungeon</title>
-  <style>
-    :root {
-      --bg: #0c0a12;
-      --bg-2: #151220;
-      --accent: #8b6fb8;
-      --accent-2: #c98a6e;
-      --text: #e9e2ea;
-      --text-dim: #948a9c;
-      --danger: #a8425c;
-      --border: rgba(233, 226, 234, 0.08);
-      font-size: 16px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Dungeon</title>
+<style>
+  :root{
+    --bg:#0c0a12;
+    --bg-2:#151220;
+    --accent:#8b6fb8;
+    --accent-2:#c98a6e;
+    --text:#e9e2ea;
+    --text-dim:#948a9c;
+    --danger:#a8425c;
+    --border:rgba(233,226,234,0.08);
+    font-size:16px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{
+    height:100%;
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,system-ui,sans-serif;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  body{ min-height:100%; display:flex; justify-content:center; }
+  #app{ width:100%; max-width:480px; min-height:100vh; display:flex; flex-direction:column; }
 
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+  header{
+    padding:18px 20px 14px;
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    background:rgba(12,10,18,0.92);
+    backdrop-filter:blur(6px);
+    z-index:5;
+  }
+  .title-row{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; }
+  .game-title{ font-size:0.7rem; letter-spacing:0.12em; color:var(--text-dim); text-transform:uppercase; }
+  .room-name{ font-size:1rem; color:var(--accent); }
+  .meter-label{ display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-dim); margin-bottom:5px; }
+  .meter-track{ height:7px; border-radius:5px; background:var(--bg-2); overflow:hidden; border:1px solid var(--border); }
+  .meter-fill{ height:100%; border-radius:5px; background:linear-gradient(90deg, var(--accent-2), var(--accent)); transition:width 0.4s ease; }
 
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, system-ui, sans-serif;
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
-    }
+  main{ flex:1; padding:22px 20px 12px; overflow-y:auto; }
+  .scene-text{ font-size:1.02rem; line-height:1.65; margin:0 0 16px; }
+  /* Secret texts (thresholdTexts): titled block explaining why it is visible */
+  .threshold-block{ margin:0 0 18px; padding-left:14px; border-left:2px solid var(--accent-2); }
+  .threshold-text{ font-size:0.96rem; line-height:1.6; color:var(--text-dim); margin:0 0 8px; }
+  .threshold-text:last-child{ margin-bottom:0; }
 
-    body {
-      min-height: 100%;
-      display: flex;
-      justify-content: center;
-    }
+  /* Shared heading for outcome / secret text / secret thought blocks */
+  .block-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
+  .block-title{ font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-2); }
+  .block-reason{ display:block; font-size:0.78rem; font-style:italic; color:var(--text-dim); margin-bottom:8px; line-height:1.45; }
+  .result-badge{ font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; padding:2px 8px; border-radius:20px; border:1px solid var(--border); color:var(--text-dim); white-space:nowrap; }
+  .result-badge.success{ color:var(--accent-2); border-color:rgba(201,138,110,0.45); }
+  .result-badge.fail{ color:var(--danger); border-color:rgba(168,66,92,0.45); }
+  .chosen{ font-size:0.8rem; color:var(--text-dim); margin-bottom:10px; }
 
-    #app {
-      width: 100%;
-      max-width: 480px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+  /* End of chapter: scene without choices */
+  .chapter-end{
+    padding:18px 16px; text-align:center;
+    border:1px dashed rgba(139,111,184,0.35); border-radius:12px;
+    background:rgba(139,111,184,0.05);
+  }
+  .chapter-end .block-title{ display:block; margin-bottom:8px; color:var(--accent); }
+  .chapter-end p{ margin:0; font-size:0.9rem; line-height:1.55; color:var(--text-dim); }
+  .engine-error{ padding:14px 16px; border:1px solid rgba(168,66,92,0.4); border-radius:10px; color:var(--text); font-size:0.9rem; line-height:1.55; }
+  .engine-error button{ margin-top:12px; padding:8px 14px; background:transparent; border:1px solid var(--border); color:var(--text-dim); border-radius:8px; font-size:0.8rem; cursor:pointer; }
+  .hidden-thought{
+    margin:0 0 18px; padding:14px 16px;
+    background:rgba(139,111,184,0.09);
+    border:1px solid rgba(139,111,184,0.25);
+    border-radius:10px;
+    font-size:0.9rem; line-height:1.55; color:var(--accent);
+  }
+  .hidden-thought .tag{ display:block; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); opacity:0.8; margin-bottom:6px; }
+  .hidden-thought p{ margin:0 0 8px; font-size:inherit; line-height:inherit; color:inherit; }
+  .hidden-thought p:last-child{ margin-bottom:0; }
 
-    header {
-      padding: 18px 20px 14px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: env(safe-area-inset-top, 0px);
-      background: rgba(12, 10, 18, 0.92);
-      backdrop-filter: blur(6px);
-      z-index: 5;
-    }
-
-    .title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 10px;
-    }
-
-    .game-title {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .room-name {
-      font-size: 1rem;
-      color: var(--accent);
-    }
-
-    .meter-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.68rem;
-      color: var(--text-dim);
-      margin-bottom: 5px;
-    }
-
-    .meter-track {
-      height: 7px;
-      border-radius: 5px;
-      background: var(--bg-2);
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .meter-fill {
-      height: 100%;
-      border-radius: 5px;
-      background: linear-gradient(90deg, var(--accent-2), var(--accent));
-      transition: width 0.4s ease;
-    }
-
-    main {
-      flex: 1;
-      padding: 22px 20px 12px;
-      overflow-y: auto;
-    }
-
-    .scene-text {
-      font-size: 1.02rem;
-      line-height: 1.65;
-      margin: 0 0 16px;
-    }
-
-    .threshold-text {
-      font-size: 0.96rem;
-      line-height: 1.6;
-      color: var(--text-dim);
-      margin: 0 0 18px;
-      padding-left: 14px;
-      border-left: 2px solid var(--accent-2);
-    }
-
-    .hidden-thought {
-      margin: 0 0 18px;
-      padding: 14px 16px;
-      background: rgba(139, 111, 184, 0.09);
-      border: 1px solid rgba(139, 111, 184, 0.25);
-      border-radius: 10px;
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--accent);
-    }
-
-    .hidden-thought .tag {
-      display: block;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-2);
-      margin-bottom: 6px;
-    }
-
-    .hidden-thought p {
-      margin: 0 0 8px;
-      font-size: inherit;
-      line-height: inherit;
-      color: inherit;
-    }
-
-    .hidden-thought p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Übergangs-Log: Konsequenz der letzten Entscheidung, klar abgesetzt
+  /* Übergangs-Log: Konsequenz der letzten Entscheidung, klar abgesetzt
      vom neuen Szenentext, mit kurzer Einblend-Animation. */
-    .transition {
-      margin: 0 0 22px;
-      animation: transitionIn 0.45s ease;
-    }
+  .transition{
+    margin:0 0 22px;
+    animation:transitionIn 0.45s ease;
+  }
+  .transition-log{
+    padding:14px 16px;
+    background:var(--bg-2);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent-2);
+    border-radius:10px;
+    font-size:0.95rem;
+    line-height:1.55;
+    color:var(--text);
+  }
+  .transition-log p{ margin:0 0 8px; }
+  .transition-log .block-head{ margin-bottom:4px; }
+  .transition-log p:last-child{ margin-bottom:0; }
+  .transition-divider{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:16px 0;
+    color:var(--text-dim);
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .transition-divider::before,
+  .transition-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+  @keyframes transitionIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .choices{ display:flex; flex-direction:column; gap:10px; padding:8px 20px 24px; }
+  .choice-btn{
+    width:100%; text-align:left; padding:15px 16px;
+    background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
+    color:var(--text); font-family:inherit; font-size:0.94rem; line-height:1.4;
+    cursor:pointer; display:flex; align-items:center; gap:10px; min-height:52px;
+    transition:transform 0.1s, background 0.15s;
+    touch-action:manipulation;   /* no double-tap-zoom delay on mobile */
+    user-select:none; -webkit-user-select:none;
+  }
+  .choice-btn:active{ transform:scale(0.98); background:#1c1826; }
+  .choice-btn.type-a{ border-left:3px solid var(--accent-2); }
+  .choice-btn.type-b{ border-left:3px solid var(--accent); }
+  .choice-btn.neutral{ border-left:3px solid var(--text-dim); }
+  .choice-btn .difficulty{ margin-left:auto; font-size:0.63rem; color:var(--text-dim); white-space:nowrap; }
 
-    .transition-log {
-      padding: 14px 16px;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent-2);
-      border-radius: 10px;
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--text);
-    }
-
-    .transition-log p {
-      margin: 0 0 8px;
-    }
-
-    .transition-log p:last-child {
-      margin-bottom: 0;
-    }
-
-    .transition-divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 16px 0;
-      color: var(--text-dim);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .transition-divider::before,
-    .transition-divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    @keyframes transitionIn {
-      from {
-        opacity: 0;
-        transform: translateY(-6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .choices {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 8px 20px 24px;
-    }
-
-    .choice-btn {
-      width: 100%;
-      text-align: left;
-      padding: 15px 16px;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.94rem;
-      line-height: 1.4;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 52px;
-      transition: transform 0.1s, background 0.15s;
-    }
-
-    .choice-btn:active {
-      transform: scale(0.98);
-      background: #1c1826;
-    }
-
-    .choice-btn.type-a {
-      border-left: 3px solid var(--accent-2);
-    }
-
-    .choice-btn.type-b {
-      border-left: 3px solid var(--accent);
-    }
-
-    .choice-btn.neutral {
-      border-left: 3px solid var(--text-dim);
-    }
-
-    .choice-btn .difficulty {
-      margin-left: auto;
-      font-size: 0.63rem;
-      color: var(--text-dim);
-      white-space: nowrap;
-    }
-
-    .lock-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
-      text-align: center;
-      z-index: 50;
-    }
-
-    .lock-screen h1 {
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 14px;
-    }
-
-    .lock-screen p {
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      line-height: 1.65;
-      max-width: 340px;
-    }
-
-    .lock-badge {
-      margin-top: 24px;
-      font-size: 0.63rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--danger);
-      border: 1px solid rgba(168, 66, 92, 0.4);
-      padding: 6px 14px;
-      border-radius: 20px;
-    }
-
-    .reset-btn {
-      margin-top: 20px;
-      padding: 8px 16px;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      border-radius: 8px;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-  </style>
+  .lock-screen{
+    position:fixed; inset:0; background:var(--bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:32px; text-align:center; z-index:50;
+  }
+  .lock-screen h1{ font-size:1.2rem; color:var(--accent); margin-bottom:14px; }
+  .lock-screen p{ color:var(--text-dim); font-size:0.9rem; line-height:1.65; max-width:340px; }
+  .lock-badge{
+    margin-top:24px; font-size:0.63rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--danger); border:1px solid rgba(168,66,92,0.4); padding:6px 14px; border-radius:20px;
+  }
+  .reset-btn{
+    margin-top:20px; padding:8px 16px; background:transparent; border:1px solid var(--border);
+    color:var(--text-dim); border-radius:8px; font-size:0.75rem; cursor:pointer;
+  }
+</style>
 </head>
-
 <body>
-  <div id="app">
-    <header>
-      <div class="title-row">
-        <span class="game-title">Chapter One</span>
-        <span class="room-name" id="roomName">Khalisi</span>
-      </div>
-      <div class="meter-label">
-        <span id="meterLabel">Lust</span>
-        <span id="meterValue">0 / 100</span>
-      </div>
-      <div class="meter-track">
-        <div class="meter-fill" id="meterFill" style="width:0%"></div>
-      </div>
-    </header>
+<div id="app">
+  <header>
+    <div class="title-row">
+      <span class="game-title">Chapter One</span>
+      <span class="room-name" id="roomName">Khalisi</span>
+    </div>
+    <div class="meter-label">
+      <span id="meterLabel">Lust</span>
+      <span id="meterValue">0 / 100</span>
+    </div>
+    <div class="meter-track"><div class="meter-fill" id="meterFill" style="width:0%"></div></div>
+  </header>
 
-    <main id="main"></main>
-    <div class="choices" id="choices"></div>
-  </div>
+  <main id="main"></main>
+  <div class="choices" id="choices"></div>
+</div>
 
-  <script>
-    /* =========================================================================
-   GENERISCHE TEXT-DUNGEON-ENGINE — ohne Inhalte.
-   Alles Erzählerische kommt ausschließlich aus SCENES{} und CONFIG{}.
-   Diese Datei enthält NUR Struktur/Logik, keine Story.
+<script>
+/* =========================================================================
+   GENERIC TEXT-DUNGEON ENGINE
+   All narrative content comes exclusively from SCENES{} and CONFIG{}.
 
-   Aufbau:
-   1. CONFIG        – globale Einstellungen (Stat-Name, Startwerte, Storage-Keys)
-   2. SCENES{}       – dein Content geht hier rein (aktuell 1 Platzhalter)
-   3. ENDINGS{}      – deine Ending-Texte gehen hier rein
-   4. Engine-Code    – unverändert lassen, greift nur auf 1–3 zu
+   Structure:
+   1. CONFIG        – global settings (stat name, start values, storage keys, UI texts)
+   2. SCENES{}      – your content goes here
+   3. ENDINGS{}     – your ending texts go here
+   4. Engine code   – leave unchanged, only reads 1–3
    ========================================================================= */
 
-    const CONFIG = {
-      storageKeySave: "dungeon_save_v1",
-      storageKeyLock: "dungeon_ending_locked",
-      startScene: "PROLOG",
-      startStatValue: 25,
-      statMin: 0,
-      statMax: 100,
-      statLabel: "Lust", // z.B. "Erregung", "Mana", "Verdacht" ...
-    };
+const CONFIG = {
+  storageKeySave: "dungeon_save_v1",
+  storageKeyLock: "dungeon_ending_locked",
+  startScene: "PROLOG",
+  startStatValue: 25,
+  statMin: 0,
+  statMax: 100,
+  statLabel: "Lust",          // e.g. "Mana", "Suspicion" ...
 
-    /* ---------------------------------------------------------------------
-       2. SCENES — Datenmodell pro Szene:
+  // UI texts used by the engine (not story content)
+  ui: {
+    outcomeTitle:       "Outcome of your choice",
+    youChose:           "You chose",
+    resultSuccess:      "Success",
+    resultFail:         "Failed",
+    resultRequirement:  "Requirement not met",
+    secretTextTitle:    "Secret Text",
+    secretTextSuffix:   "you get a feeling…",
+    secretThoughtTitle: "Secret Thought",
+    secretThoughtSuffix:"you can think…",
+    notEnoughStat:      "You dont have enough lust",
+    chapterEndTitle:    "End of Chapter",
+    chapterEndText:     "The story pauses here for now. Your progress is saved – the next chapter will continue right from this point.",
+    lockedTitle:        "Completed",
+    lockedBadge:        "One-time experience — already completed",
+    resetButton:        "Reset locally (Dev only)",
+    unknownEnding:      "UNKNOWN ENDING",
+    missingScene:       "Error: scene \"{id}\" does not exist in SCENES{}.",
+    goBack:             "Go back"
+  },
+  logHistoryLimit: 50         // only the last N log entries are kept in the save
+};
 
-       "sceneId": {
-         title: string,
-         baseText: string,                  // immer sichtbarer Basistext
-         thresholdTexts: [                  // optional, je nach Statwert
-           { min: number, max: number, text: string }
-         ],
-         hiddenThought: {                   // optional, ab Schwellwert sichtbar
-           unlockAt: number,
-           tag: string,
-           text: string
-         },
-         choices: [
-           {
-             id: string,
-             type: "type-a" | "type-b" | "neutral",   // rein visuelle Kategorie, frei belegbar
-             icon: string,
-             text: string,
-             difficultyLabel: string,        // optional, nur Anzeige
-             successChance: number,          // 0–1, Wahrscheinlichkeit für onSuccess
-             requiresStat: number,           // optional, harte Voraussetzung (Gate)
-             onSuccess: { next, statDelta, log } | { ending: "endingId" },
-             onFail:    { next, statDelta, log },
-             onFailRequirement: { next, statDelta, log }  // falls requiresStat nicht erfüllt
-           }
-         ],
-         isFinalGate: boolean                // optional, nur zur eigenen Orientierung
+/* ---------------------------------------------------------------------
+   2. SCENES — data model per scene:
+
+   "sceneId": {
+     title: string,
+     baseText: string,                  // always visible base text
+     thresholdTexts: [                  // optional, depending on stat value (shown as "Secret Text")
+       { min: number, max: number, text: string }
+     ],
+     hiddenThought: {                   // optional, visible from threshold on (shown as "Secret Thought")
+       unlockAt: number,
+       tag: string,
+       text: string
+     },
+     choices: [
+       {
+         id: string,
+         type: "type-a" | "type-b" | "neutral",   // purely visual category
+         icon: string,
+         text: string,
+         difficultyLabel: string,        // optional, display only
+         successChance: number,          // 0–100 (percent). The current stat value is
+                                         // added as a bonus: chance = successChance + stat
+         requiresStat: number,           // optional, hard requirement (gate)
+         onSuccess: { next, statDelta, log } | { ending: "endingId" },
+         onFail:    { next, statDelta, log },   // optional: if missing, the choice ALWAYS succeeds
+         onFailRequirement: { next, statDelta, log }  // if requiresStat is not met
        }
-       --------------------------------------------------------------------- */
+     ],                                  // EMPTY or MISSING choices = intended end of
+                                         // chapter (no error, "End of Chapter" is shown)
+     chapterEnd: { title, text },        // optional, overrides the default chapter-end texts
+     isFinalGate: boolean                // optional, just for your own orientation
+   }
+   --------------------------------------------------------------------- */
 
-    const SCENES = {
+const SCENES = {
 
       "PROLOG": {
         title: "Prolog",
@@ -919,7 +788,7 @@
     };
 
     /* ---------------------------------------------------------------------
-       3. ENDINGS — beliebig viele möglich, referenziert über choice.onSuccess.ending
+       3. ENDINGS — any number, referenced via choice.onSuccess.ending
        --------------------------------------------------------------------- */
 
     const ENDINGS = {
@@ -933,225 +802,398 @@
       }
     };
 
-    /* =========================================================================
-       4. ENGINE — ab hier nichts Inhaltliches. Nicht anfassen, wenn nur
-       Content ergänzt werden soll.
-       ========================================================================= */
+/* =========================================================================
+   4. ENGINE — nothing content-related from here on. Leave untouched if you
+   only want to add content.
+   ========================================================================= */
 
-    let state = loadState();
+/* --- Storage (with fallback if localStorage is blocked, e.g. in iframes) --- */
+const memoryStore = {};
+const store = {
+  get(key){
+    try { return localStorage.getItem(key); } catch(e){ return key in memoryStore ? memoryStore[key] : null; }
+  },
+  set(key, value){
+    try { localStorage.setItem(key, value); } catch(e){ memoryStore[key] = value; }
+  },
+  remove(key){
+    try { localStorage.removeItem(key); } catch(e){ /* ignore */ }
+    delete memoryStore[key];
+  }
+};
 
-    function loadState() {
-      const raw = localStorage.getItem(CONFIG.storageKeySave);
-      if (raw) {
-        try {
-          return JSON.parse(raw);
-        } catch (e) {
-          /* fällt durch */
-        }
+let state = loadState();
+
+function loadState(){
+  const raw = store.get(CONFIG.storageKeySave);
+  if(raw){
+    try {
+      const parsed = JSON.parse(raw);
+      if(parsed && typeof parsed === "object"){
+        if(!Array.isArray(parsed.log)) parsed.log = [];
+        return parsed;
       }
-      return {
-        currentScene: CONFIG.startScene,
-        stat: CONFIG.startStatValue,
-        log: []
-      };
+    } catch(e){ /* fall through */ }
+  }
+  return { currentScene: CONFIG.startScene, stat: CONFIG.startStatValue, log: [] };
+}
+function saveState(){
+  if(state.log.length > CONFIG.logHistoryLimit){
+    state.log = state.log.slice(-CONFIG.logHistoryLimit);
+  }
+  store.set(CONFIG.storageKeySave, JSON.stringify(state));
+}
+function isLocked(){
+  return store.get(CONFIG.storageKeyLock) !== null;
+}
+function lockGame(endingId){
+  store.set(CONFIG.storageKeyLock, JSON.stringify({
+    ending: endingId,
+    timestamp: new Date().toISOString()
+  }));
+}
+function resetGame(){
+  store.remove(CONFIG.storageKeySave);
+  store.remove(CONFIG.storageKeyLock);
+  state = loadState();
+  render();
+  scrollToTop();
+}
+
+const appEl = document.getElementById("app");
+const mainEl = document.getElementById("main");
+const choicesEl = document.getElementById("choices");
+const roomNameEl = document.getElementById("roomName");
+const meterFillEl = document.getElementById("meterFill");
+const meterValueEl = document.getElementById("meterValue");
+const meterLabelEl = document.getElementById("meterLabel");
+
+/* Scrolls the story back to the very top (page and main container). */
+function scrollToTop(){
+  mainEl.scrollTop = 0;
+  if(document.scrollingElement) document.scrollingElement.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+function pickThreshold(scene, statValue){
+  if(!Array.isArray(scene.thresholdTexts)) return null;
+  return scene.thresholdTexts.find(t => t && statValue >= t.min && statValue <= t.max) || null;
+}
+
+function hasText(text){
+  return typeof text === "string" && text.trim().length > 0;
+}
+
+/* Builds the explanation why a secret block is visible, e.g.
+   "Because your Lust is 50 or higher (currently 62), you get a feeling…" */
+function describeStatReason(min, max, suffix){
+  const label = CONFIG.statLabel;
+  const current = `(currently ${state.stat})`;
+  const noMin = min === undefined || min === null || min <= CONFIG.statMin;
+  const noMax = max === undefined || max === null || max >= CONFIG.statMax;
+  let condition;
+  if(noMin && noMax) condition = `Whatever your ${label} is ${current},`;
+  else if(noMin)     condition = `Because your ${label} is ${max} or lower ${current},`;
+  else if(noMax)     condition = `Because your ${label} is ${min} or higher ${current},`;
+  else               condition = `Because your ${label} is between ${min} and ${max} ${current},`;
+  return `${condition} ${suffix}`;
+}
+
+/* Renders a text string with \n as paragraph breaks.
+   Creates one <p> per paragraph with the given class and appends it to
+   container. Uses textContent (no innerHTML) so content text stays safe. */
+function renderMultilineText(container, text, className){
+  if(!hasText(text)) return;
+  const paragraphs = text.split("\n").filter(line => line.trim().length > 0);
+  paragraphs.forEach(paragraph => {
+    const p = document.createElement("p");
+    p.className = className;
+    p.textContent = paragraph;
+    container.appendChild(p);
+  });
+}
+
+function makeBlockHead(title, badgeText, badgeClass){
+  const head = document.createElement("div");
+  head.className = "block-head";
+  const t = document.createElement("span");
+  t.className = "block-title";
+  t.textContent = title;
+  head.appendChild(t);
+  if(badgeText){
+    const badge = document.createElement("span");
+    badge.className = "result-badge " + (badgeClass || "");
+    badge.textContent = badgeText;
+    head.appendChild(badge);
+  }
+  return head;
+}
+
+function removeLockScreen(){
+  const existing = document.getElementById("lockScreen");
+  if(existing) existing.remove();
+}
+
+function render(){
+  meterLabelEl.textContent = CONFIG.statLabel;
+  removeLockScreen();
+
+  if(isLocked()){
+    renderLockScreen();
+    return;
+  }
+
+  const scene = SCENES[state.currentScene];
+  if(!scene){
+    renderMissingScene();
+    return;
+  }
+
+  roomNameEl.textContent = scene.title || "";
+  const range = (CONFIG.statMax - CONFIG.statMin) || 1;
+  meterFillEl.style.width = ((state.stat - CONFIG.statMin) / range * 100) + "%";
+  meterValueEl.textContent = state.stat + " / " + CONFIG.statMax;
+
+  mainEl.innerHTML = "";
+
+  // Transition log: outcome of the last choice, shown BEFORE the new scene
+  // text so the change reads like a consequence.
+  const lastEntry = state.log[state.log.length - 1];
+  // Old saves stored plain strings – support both formats.
+  const entry = typeof lastEntry === "string" ? { text: lastEntry } : lastEntry;
+  if(entry && (hasText(entry.text) || entry.choice)){
+    const transition = document.createElement("div");
+    transition.className = "transition";
+
+    const logBox = document.createElement("div");
+    logBox.className = "transition-log";
+
+    let badgeText = null, badgeClass = "";
+    if(entry.result === "success"){ badgeText = CONFIG.ui.resultSuccess; badgeClass = "success"; }
+    else if(entry.result === "fail"){ badgeText = CONFIG.ui.resultFail; badgeClass = "fail"; }
+    else if(entry.result === "requirement"){ badgeText = CONFIG.ui.resultRequirement; badgeClass = "fail"; }
+    logBox.appendChild(makeBlockHead(CONFIG.ui.outcomeTitle, badgeText, badgeClass));
+
+    if(entry.choice){
+      const chosen = document.createElement("div");
+      chosen.className = "chosen";
+      chosen.textContent = `${CONFIG.ui.youChose}: “${entry.choice}”`;
+      logBox.appendChild(chosen);
     }
 
-    function saveState() {
-      localStorage.setItem(CONFIG.storageKeySave, JSON.stringify(state));
+    renderMultilineText(logBox, entry.text, "");
+    transition.appendChild(logBox);
+
+    const divider = document.createElement("div");
+    divider.className = "transition-divider";
+    divider.textContent = scene.title || "";
+    transition.appendChild(divider);
+
+    mainEl.appendChild(transition);
+  }
+
+  renderMultilineText(mainEl, scene.baseText, "scene-text");
+
+  // Secret Text (thresholdTexts)
+  const threshold = pickThreshold(scene, state.stat);
+  if(threshold && hasText(threshold.text)){
+    const block = document.createElement("div");
+    block.className = "threshold-block";
+    block.appendChild(makeBlockHead(CONFIG.ui.secretTextTitle));
+    const reason = document.createElement("span");
+    reason.className = "block-reason";
+    reason.textContent = describeStatReason(threshold.min, threshold.max, CONFIG.ui.secretTextSuffix);
+    block.appendChild(reason);
+    renderMultilineText(block, threshold.text, "threshold-text");
+    mainEl.appendChild(block);
+  }
+
+  // Secret Thought (hiddenThought)
+  if(scene.hiddenThought && hasText(scene.hiddenThought.text) && state.stat >= scene.hiddenThought.unlockAt){
+    const box = document.createElement("div");
+    box.className = "hidden-thought";
+    box.appendChild(makeBlockHead(CONFIG.ui.secretThoughtTitle));
+    const reason = document.createElement("span");
+    reason.className = "block-reason";
+    reason.textContent = describeStatReason(scene.hiddenThought.unlockAt, undefined, CONFIG.ui.secretThoughtSuffix);
+    box.appendChild(reason);
+    if(hasText(scene.hiddenThought.tag)){
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = scene.hiddenThought.tag;
+      box.appendChild(tag);
     }
+    renderMultilineText(box, scene.hiddenThought.text, "");
+    mainEl.appendChild(box);
+  }
 
-    function isLocked() {
-      return localStorage.getItem(CONFIG.storageKeyLock) !== null;
-    }
+  renderChoices(scene);
+}
 
-    function lockGame(endingId) {
-      localStorage.setItem(CONFIG.storageKeyLock, JSON.stringify({
-        ending: endingId,
-        timestamp: new Date().toISOString()
-      }));
-    }
+function renderChoices(scene){
+  choicesEl.innerHTML = "";
+  const choices = Array.isArray(scene.choices) ? scene.choices.filter(Boolean) : [];
 
-    function resetGame() {
-      localStorage.removeItem(CONFIG.storageKeySave);
-      localStorage.removeItem(CONFIG.storageKeyLock);
-      state = loadState();
-      render();
-    }
+  // FAILSAFE: no choices = intended end of chapter, not an error.
+  if(choices.length === 0){
+    renderChapterEnd(scene);
+    return;
+  }
 
-    const mainEl = document.getElementById("main");
-    const choicesEl = document.getElementById("choices");
-    const roomNameEl = document.getElementById("roomName");
-    const meterFillEl = document.getElementById("meterFill");
-    const meterValueEl = document.getElementById("meterValue");
-    const meterLabelEl = document.getElementById("meterLabel");
-
-    function pickThreshold(scene, statValue) {
-      if (!scene.thresholdTexts) return null;
-      return scene.thresholdTexts.find(t => statValue >= t.min && statValue <= t.max);
-    }
-
-    /* Rendert einen Text-String mit \n als Absatzumbrüchen.
-       Erzeugt für jeden Abschnitt ein eigenes <p>-Element mit der übergebenen
-       Klasse und hängt sie an container an. Nutzt textContent (kein innerHTML),
-       damit beliebiger Content-Text sicher bleibt. */
-    function renderMultilineText(container, text, className) {
-      if (!text) return;
-      const paragraphs = text.split("\n").filter(line => line.trim().length > 0);
-      paragraphs.forEach(paragraph => {
-        const p = document.createElement("p");
-        p.className = className;
-        p.textContent = paragraph;
-        container.appendChild(p);
-      });
-    }
-
-    function render() {
-      meterLabelEl.textContent = CONFIG.statLabel;
-
-      if (isLocked()) {
-        renderLockScreen();
-        return;
-      }
-
-      const scene = SCENES[state.currentScene];
-      if (!scene) {
-        mainEl.innerHTML = `<p class="scene-text">Fehler: Szene "${state.currentScene}" existiert nicht in SCENES{}.</p>`;
-        choicesEl.innerHTML = "";
-        return;
-      }
-
-      roomNameEl.textContent = scene.title;
-      meterFillEl.style.width = state.stat + "%";
-      meterValueEl.textContent = state.stat + " / " + CONFIG.statMax;
-
-      mainEl.innerHTML = "";
-
-      // Übergangs-Log: was die letzte Entscheidung bewirkt hat, klar sichtbar
-      // VOR dem neuen Szenentext, damit sich der Wechsel wie eine Konsequenz liest.
-      const lastLog = state.log[state.log.length - 1];
-      if (lastLog) {
-        const transition = document.createElement("div");
-        transition.className = "transition";
-
-        const logBox = document.createElement("div");
-        logBox.className = "transition-log";
-        renderMultilineText(logBox, lastLog, "");
-        transition.appendChild(logBox);
-
-        const divider = document.createElement("div");
-        divider.className = "transition-divider";
-        divider.textContent = scene.title;
-        transition.appendChild(divider);
-
-        mainEl.appendChild(transition);
-      }
-
-      renderMultilineText(mainEl, scene.baseText, "scene-text");
-
-      const threshold = pickThreshold(scene, state.stat);
-      if (threshold) {
-        renderMultilineText(mainEl, threshold.text, "threshold-text");
-      }
-
-      if (scene.hiddenThought && state.stat >= scene.hiddenThought.unlockAt) {
-        const box = document.createElement("div");
-        box.className = "hidden-thought";
-        const tag = document.createElement("span");
-        tag.className = "tag";
-        tag.textContent = scene.hiddenThought.tag;
-        box.appendChild(tag);
-        renderMultilineText(box, scene.hiddenThought.text, "");
-        mainEl.appendChild(box);
-      }
-
-      renderChoices(scene);
-    }
-
-    function renderChoices(scene) {
-      choicesEl.innerHTML = "";
-      scene.choices.forEach(choice => {
-        const btn = document.createElement("button");
-        btn.className = "choice-btn " + choice.type;
-        const meetsReq = !choice.requiresStat || state.stat >= choice.requiresStat;
-        btn.innerHTML = `
+  choices.forEach(choice => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "choice-btn " + (choice.type || "neutral");
+    const meetsReq = !choice.requiresStat || state.stat >= choice.requiresStat;
+    btn.innerHTML = `
       <span>${choice.icon || ""}</span>
-      <span>${choice.text}</span>
-      ${choice.difficultyLabel ? `<span class="difficulty">${meetsReq ? choice.difficultyLabel : "You dont have enough lust"}</span>` : ""}
+      <span>${choice.text || ""}</span>
+      ${choice.difficultyLabel ? `<span class="difficulty">${meetsReq ? choice.difficultyLabel : CONFIG.ui.notEnoughStat}</span>` : ""}
     `;
-        btn.addEventListener("click", () => resolveChoice(choice));
-        choicesEl.appendChild(btn);
-      });
-    }
+    btn.addEventListener("click", () => resolveChoice(choice));
+    choicesEl.appendChild(btn);
+  });
+}
 
-    function resolveChoice(choice) {
-      // Hartes Gate prüfen
-      if (choice.requiresStat && state.stat < choice.requiresStat) {
-        applyOutcome(choice.onFailRequirement);
-        return;
-      }
+function renderChapterEnd(scene){
+  const info = scene.chapterEnd || {};
+  const box = document.createElement("div");
+  box.className = "chapter-end";
+  const title = document.createElement("span");
+  title.className = "block-title";
+  title.textContent = info.title || CONFIG.ui.chapterEndTitle;
+  box.appendChild(title);
+  const p = document.createElement("p");
+  p.textContent = info.text || CONFIG.ui.chapterEndText;
+  box.appendChild(p);
+  choicesEl.appendChild(box);
+}
 
-      // Direkter Ending-Trigger ohne Probe
-      if (choice.onSuccess && choice.onSuccess.ending && choice.successChance === undefined) {
-        triggerEnding(choice.onSuccess.ending);
-        return;
-      }
-
-      const roll = Math.random() * 100;
-      // successChance wird hier direkt als Prozentwert + Stat-Bonus (z.B. 0-100) gewertet
-      const chance = (choice.successChance + state.stat) ?? 1.0;
-      const success = roll <= chance;
-      
-      const outcome = success ? choice.onSuccess : choice.onFail;
-      applyOutcome(outcome);
-    }
-
-    function applyOutcome(outcome) {
-      if (!outcome) return;
-
-      if (outcome.ending) {
-        triggerEnding(outcome.ending);
-        return;
-      }
-
-      state.stat = Math.max(CONFIG.statMin, Math.min(CONFIG.statMax, state.stat + (outcome.statDelta || 0)));
-      state.currentScene = outcome.next;
-      state.log.push(outcome.log || null);
+function renderMissingScene(){
+  roomNameEl.textContent = "—";
+  choicesEl.innerHTML = "";
+  mainEl.innerHTML = "";
+  const box = document.createElement("div");
+  box.className = "engine-error";
+  box.textContent = CONFIG.ui.missingScene.replace("{id}", String(state.currentScene));
+  console.warn("[Engine] Missing scene:", state.currentScene);
+  if(state.prev && SCENES[state.prev.currentScene]){
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = CONFIG.ui.goBack;
+    btn.addEventListener("click", () => {
+      state.currentScene = state.prev.currentScene;
+      state.stat = state.prev.stat;
+      state.prev = null;
       saveState();
       render();
+      scrollToTop();
+    });
+    box.appendChild(document.createElement("br"));
+    box.appendChild(btn);
+  }
+  mainEl.appendChild(box);
+}
+
+/* Guard against double taps: while one choice is being resolved,
+   further clicks are ignored. Always released, even on errors. */
+let isResolving = false;
+
+function resolveChoice(choice){
+  if(isResolving) return;
+  isResolving = true;
+  try {
+    // Check hard gate
+    if(choice.requiresStat && state.stat < choice.requiresStat){
+      applyOutcome(choice.onFailRequirement, choice, "requirement");
+      return;
     }
 
-    function triggerEnding(endingId) {
-      lockGame(endingId);
-      render();
+    // Direct ending trigger without roll
+    if(choice.onSuccess && choice.onSuccess.ending && choice.successChance === undefined){
+      triggerEnding(choice.onSuccess.ending);
+      return;
     }
 
-    function renderLockScreen() {
-      const lockData = JSON.parse(localStorage.getItem(CONFIG.storageKeyLock));
-      const ending = ENDINGS[lockData.ending] || {
-        title: "[UNBEKANNTES ENDING: " + lockData.ending + "]",
-        text: ""
-      };
+    // successChance is a percent value (0–100) plus the current stat as bonus.
+    const base = typeof choice.successChance === "number" ? choice.successChance : 100;
+    const chance = base + state.stat;
 
-      mainEl.innerHTML = "";
-      choicesEl.innerHTML = "";
-      roomNameEl.textContent = "Abgeschlossen";
-      meterFillEl.style.width = "100%";
-      meterValueEl.textContent = "—";
+    // FAILSAFE: without an onFail there is nothing that could happen on a
+    // failed roll – previously the click then silently did nothing.
+    // Such choices therefore always succeed.
+    if(!choice.onFail || chance >= 100){
+      applyOutcome(choice.onSuccess, choice, null);
+      return;
+    }
 
-      const screen = document.createElement("div");
-      screen.className = "lock-screen";
-      screen.innerHTML = `
+    const roll = Math.random() * 100;
+    const success = roll <= chance;
+    const outcome = success ? choice.onSuccess : choice.onFail;
+    applyOutcome(outcome, choice, success ? "success" : "fail");
+  } catch(e){
+    console.error("[Engine] Error while resolving choice", choice && choice.id, e);
+  } finally {
+    requestAnimationFrame(() => { isResolving = false; });
+  }
+}
+
+function applyOutcome(outcome, choice, result){
+  if(!outcome){
+    // Makes silent "nothing happens" clicks visible for debugging
+    console.warn(`[Engine] Choice "${choice && choice.id}" has no outcome for result "${result || "success"}". Nothing happens.`);
+    return;
+  }
+
+  if(outcome.ending){
+    triggerEnding(outcome.ending);
+    return;
+  }
+
+  state.prev = { currentScene: state.currentScene, stat: state.stat };
+  state.stat = Math.max(CONFIG.statMin, Math.min(CONFIG.statMax, state.stat + (outcome.statDelta || 0)));
+  state.currentScene = outcome.next;
+  state.log.push({
+    text: outcome.log || null,
+    choice: choice ? choice.text : null,
+    result: result || null
+  });
+  saveState();
+  render();
+  scrollToTop();
+}
+
+function triggerEnding(endingId){
+  lockGame(endingId);
+  render();
+  scrollToTop();
+}
+
+function renderLockScreen(){
+  let lockData = {};
+  try { lockData = JSON.parse(store.get(CONFIG.storageKeyLock)) || {}; } catch(e){ /* ignore */ }
+  const ending = ENDINGS[lockData.ending] || { title: "[" + CONFIG.ui.unknownEnding + ": " + lockData.ending + "]", text: "" };
+
+  mainEl.innerHTML = "";
+  choicesEl.innerHTML = "";
+  roomNameEl.textContent = CONFIG.ui.lockedTitle;
+  meterFillEl.style.width = "100%";
+  meterValueEl.textContent = "—";
+
+  const screen = document.createElement("div");
+  screen.className = "lock-screen";
+  screen.id = "lockScreen";
+  screen.innerHTML = `
     <h1>${ending.title}</h1>
     <p>${ending.text}</p>
-    <div class="lock-badge">Einweg-Erfahrung — bereits abgeschlossen</div>
-    <button class="reset-btn" id="resetBtn">Lokal zurücksetzen (Dev-Only)</button>
+    <div class="lock-badge">${CONFIG.ui.lockedBadge}</div>
+    <button class="reset-btn" id="resetBtn" type="button">${CONFIG.ui.resetButton}</button>
   `;
-      document.getElementById("app").appendChild(screen);
-      document.getElementById("resetBtn").addEventListener("click", resetGame);
-    }
+  appEl.appendChild(screen);
+  document.getElementById("resetBtn").addEventListener("click", resetGame);
+}
 
-    render();
-  </script>
+render();
+</script>
 </body>
-
 </html>
