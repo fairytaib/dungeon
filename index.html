@@ -188,11 +188,11 @@
 const CONFIG = {
   storageKeySave: "dungeon_save_v1",
   storageKeyLock: "dungeon_ending_locked",
-  startScene: "PROLOG",
-  startStatValue: 25,
+  startScene: "CHAPTER_ONE_RECAP",
+  startStatValue: 51,
   statMin: 0,
   statMax: 100,
-  statLabel: "Lust",          // e.g. "Mana", "Suspicion" ...
+  statLabel: "Submission",          // e.g. "Mana", "Suspicion" ...
 
   // UI texts used by the engine (not story content)
   ui: {
@@ -254,7 +254,7 @@ const CONFIG = {
    --------------------------------------------------------------------- */
 
 const SCENES = {
-
+/* // Chapter 1
       "PROLOG": {
         title: "Prolog",
         baseText: "The abyss does not merely exist; it breathes. It wraps around you like a shroud of frozen velvet, heavy and absolute, pressing against your chest until even the air in your lungs feels borrowed. There is no horizon here, no floor, no ceiling—only a suffocating, pitch-black infinity that swallows every sense whole.\n\nWho are you?\nThe question forms in the quiet corners of your mind, fragile and small. Where are you?\nNo sooner do the thoughts surface than the silence begins to warp. It starts as a low, vibrating hum deep within the dark, twisting into something cruel, echoing from everywhere and nowhere at once. It is not a sound you hear with your ears, but a mockery felt in the marrow of your bones—a cold, devilish laughter that delights in your ignorance. The darkness isn't just an absence of light; it is an observer. Watching. Waiting.\nYou strain your eyes, sweeping your gaze through the endless void, desperate to anchor yourself to anything. A wall, a stone, a shadow darker than the rest—there must be something here. A void this heavy cannot simply be empty.\nARGH!\nA sharp, fiery twinge flares near your belly button, tearing through you like a needle of molten glass. You flinch, doubling over as the sudden spike of agony shatters the paralysis holding you captive. Hands instinctively flying toward your stomach, you look down into the shadow—and for the briefest, heart-stopping fraction of a second, the void breaks.\nA blinding flash of luminescence tears through the gloom, blazing directly beneath your fingertips. It isn't a simple flame or a random spark. It is an intricate, violent geometry—a strange, web-like pattern carved in searing radiance that pulses once, violently, against your skin before vanishing back into the hungry dark.\nThe light is gone as quickly as it arrived, leaving behind the afterimage burned onto your retinas and the lingering heat on your skin. But the dark is no longer featureless. Now, you know it holds secrets—and whatever carved that mark into you has just begun to awaken.",
@@ -590,7 +590,7 @@ const SCENES = {
           tag: "",
           text: ""
         },
-        /* choices: [{
+         choices: [{
             id: "placeholder_choice_a",
             type: "type-a",
             icon: "◆",
@@ -649,89 +649,8 @@ const SCENES = {
               log: "[TEXT BEI NICHTERFÜLLTER VORAUSSETZUNG]"
             }
           }
-        ]*/
+        ] 
       } 
-      ,
-       "THE_FOREST_OF_DESIRE": {
-        title: "The Forest of Desire",
-        baseText: "Seems like you chose your path. Send me a Screenshot so i can see your path and prepare chapter 2 accordingly",
-        thresholdTexts: [{
-            min: 0,
-            max: 49,
-            text: ""
-          },
-          {
-            min: 50,
-            max: 100,
-            text: ""
-          }
-        ],
-        hiddenThought: {
-          unlockAt: 60,
-          tag: "",
-          text: ""
-        },
-        /* choices: [{
-            id: "placeholder_choice_a",
-            type: "type-a",
-            icon: "◆",
-            text: "Open the Hijabi Door",
-            difficultyLabel: "Purity",
-            successChance: 1,
-            onSuccess: {
-              next: "THE_DREAMLAND",
-              statDelta: -100,
-              log: ""
-            },
-          },
-          {
-            id: "placeholder_choice_b",
-            type: "type-b",
-            icon: "◆♥",
-            text: "Walk towards the black Door",
-            difficultyLabel: "Unknown",
-            successChance: 0.5,
-            onSuccess: {
-              next: "THE_DREAMLAND",
-              statDelta: 10,
-              log: "[ERFOLGSTEXT B]"
-            },
-            onFail: {
-              next: "SLEEP",
-              statDelta: -3,
-              log: "You try your hardest but you just cant remember anything. You were sure it was something important..."
-            }
-          },
-          {
-            id: "placeholder_choice_neutral",
-            type: "neutral",
-            icon: "○",
-            text: "[NEUTRALE OPTION]",
-            successChance: 1,
-            onSuccess: {
-              next: "PLACEHOLDER_SCENE",
-              statDelta: 0,
-              log: null
-            }
-          },
-          {
-            id: "placeholder_choice_gate",
-            type: "type-b",
-            icon: "⛒",
-            text: "[FINALE OPTION — Beispiel für hartes Gate]",
-            difficultyLabel: "Erfordert Stat ≥ 50",
-            requiresStat: 50,
-            onSuccess: {
-              ending: "ending_a"
-            },
-            onFailRequirement: {
-              next: "PLACEHOLDER_SCENE",
-              statDelta: 0,
-              log: "[TEXT BEI NICHTERFÜLLTER VORAUSSETZUNG]"
-            }
-          }
-        ] */
-      }
       ,
       "THE_MOCKING_OF_DARNKESS": {
         title: "The Mocking of Darkness",
@@ -752,7 +671,7 @@ const SCENES = {
           tag: "",
           text: ""
         },
-        /* choices: [{
+        choices: [{
             id: "placeholder_choice_a",
             type: "type-a",
             icon: "◆",
@@ -817,9 +736,96 @@ const SCENES = {
               log: "+0 Lust.\nThe moment you try to touch yourself, you realize that you are not even sure if you have a body. You feel like you are just a consciousness floating in the void. You cant even feel your own body. You are not sure if you even have a body.\nYou pass out. Everything turns black again."
             }
           }
-        ]*/
+        ]
       },
-      
+    */
+  // Chapter 2  
+    "CHAPTER_ONE_RECAP": {
+        title: "Recap of Chapter 1",
+        baseText: "You step across the threshold into the shifting, vibrant glow of the red door, and the moment your weight shifts, a wave of intoxicating warmth floods your veins. The colors swirl around you, bathing your skin in a soft, seductive light that makes your pulse race and your breath catch in your throat.\n\nThe air is thick with a heady, almost electric energy that seems to hum in harmony with the deep, pulsing ache in your belly. Every nerve in your body tingles with anticipation, as if the very fabric of reality is bending to your desire.\n\nAs you move forward, the world around you begins to dissolve into a kaleidoscope of sensation. The ground beneath your feet feels impossibly soft and yielding, like walking on clouds infused with warmth and light. The air carries a subtle fragrance of exotic spices and blooming flowers, wrapping around you like a lover's embrace.\n\nYou feel an irresistible pull toward the heart of this shifting paradise, as if the very essence of desire itself is guiding you forward. The more you step into the glow, the more alive you feel—every thought, every sensation amplified to an almost unbearable intensity.\n\nAnd as you reach out to touch the shimmering surface of the door, a voice whispers in your mind, soft and sultry: \"Come closer... let go... surrender to what you truly crave...\"\n\nYou are drawn inexorably toward it, unable to resist the magnetic allure of the unknown pleasures that await beyond.",
+        thresholdTexts: [{
+            min: 0,
+            max: 49,
+            text: ""
+          },
+          {
+            min: 50,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 60,
+          tag: "",
+          text: ""
+        },
+        choices: [{
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Continue your story",
+            difficultyLabel: "",
+            successChance: 100,
+            onSuccess: {
+              next: "THE_DREAMLAND",
+              statDelta: 0,
+              log: ""
+            },
+          }  
+        ] 
+      },
+      "THE_FOREST_OF_DESIRE": {
+        title: "The Forest of Desire",
+        baseText: "As you step across the threshold into the shifting, vibrant glow of the red door, a wave of intoxicating warmth floods your veins. The colors swirl around you, bathing your skin in a soft, seductive light that makes your pulse race and your breath catch in your throat.\n\nThe air is thick with a heady, almost electric energy that seems to hum in harmony with the deep, pulsing ache in your belly. Every nerve in your body tingles with anticipation, as if the very fabric of reality is bending to your desire.\n\nAs you move forward, the world around you begins to dissolve into a kaleidoscope of sensation. The ground beneath your feet feels impossibly soft and yielding, like walking on clouds infused with warmth and light. The air carries a subtle fragrance of exotic spices and blooming flowers, wrapping around you like a lover's embrace.\n\nYou feel an irresistible pull toward the heart of this shifting paradise, as if the very essence of desire itself is guiding you forward. The more you step into the glow, the more alive you feel—every thought, every sensation amplified to an almost unbearable intensity.\n\nSuddenly you stand in the middle of a lustrous forest, where the trees are tall and their leaves shimmer with a spectrum of colors that seem to pulse in time with your heartbeat. The air is thick with the scent of blooming flowers and the distant sound of a gentle stream. The forest seems alive, almost sentient, as if it knows your deepest desires and is responding to them.\n\nYou can feel the pull of the forest, drawing you deeper into its embrace.\n'Hello there', says a deep voice.\nAs you turn around you see a young man smiling at you. He is tall and handsome, with a mischievous glint in his eyes. 'I see you've found your way here. Welcome to the Forest of Desire. Here, your deepest fantasies can come to life, but be warned, not all desires are safe to pursue.'\n\nHe gestures for you to follow him deeper into the forest, where the path is lined with glowing flowers and the air is filled with a heady perfume that makes your head spin.\n\nYou feel a mix of excitement and trepidation as you take your first steps into the unknown, ready to explore the depths of your own desires.",
+        thresholdTexts: [{
+            min: 0,
+            max: 49,
+            text: ""
+          },
+          {
+            min: 50,
+            max: 100,
+            text: ""
+          }
+        ],
+        hiddenThought: {
+          unlockAt: 60,
+          tag: "",
+          text: ""
+        },
+        choices: [{
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Follow the young man",
+            difficultyLabel: "Submission",
+            successChance: 100,
+            onSuccess: {
+              next: "THE_MIDDLE_OF_THE_FOREST",
+              statDelta: 10,
+              log: "+10 Submission\nThe young man's light, fluid footsteps make no sound against the impossibly soft, moss-covered ground as he glides down the winding path. The forest breathes around you—every luminous leaf fluttering in a non-existent breeze, every velvet petal glowing with a seductive, rhythmic light that echoes the slow, heavy thrum of your own pulse.\n\nYou follow him, the heady perfume of exotic night-blooming orchids and sweet, crushed spices hanging thick in the warm air, making your skin tingle and your head spin with a hazy, intoxicating fog.\n\nHe glances back over a broad shoulder, his dark eyes sparkling with a knowing, playful amusement as he catches you watching him.\n\n'You're wondering who I am, aren't you?' he asks, his voice smooth as warmed honey, vibrating in the back of your throat. 'Or perhaps... what I am. In a realm born entirely from the friction of your own hidden cravings, labels are such tedious things. Call me a guide. Call me a guardian. Or simply call me a response to that desperate, aching void you were just drowning in.'\n\nHe stops beside an ancient, towering tree whose bark glistens like polished obsidian, woven through with veins of liquid gold. With agonizing slowness, he leans back against the trunk, crossing his arms and letting his gaze sweep over you—slow, deliberate, and entirely unashamed. The look is a physical sensation, trailing down your neck, across your chest, and settling directly over that persistent, hot knot in your belly.\n\n'You feel it, don't you?' he murmurs, stepping closer until the heat radiating from his body melts the small distance remaining between you. He reaches out, a single finger lightly tracing the line of your jaw, leaving a trail of electric sparks in its wake. 'The mark near your navel isn't a curse. It's an engine. A key. Out there in the black, you were nothing. In here...'\n\nHe tilts his head, his mischievous smile softening into something far more dangerous, far more alluring.\n\n'In here, you are the master of every hunger you've ever been too afraid to name. But every paradise exacts a toll, lost one. The deeper you go, the sweeter the fruit—and the harder it becomes to remember if you ever wanted to leave.'\n\nHe offers you his hand, palm up, long fingers inviting you to take the next step. Down the trail behind him, the stream gurgles with the sound of low, breathy whispers, and the glowing flora parts to reveal a sun-dappled clearing filled with plush, velvet cushions and figures moving together in shadowy, graceful embrace.\n\n'So tell me,'' he whispers, his eyes locking onto yours with hypnotic intensity. 'What do you want to explore first? [.... INPUT KINKS HERE ....]'\n\nThe forest seems to pulse in anticipation, every leaf and petal vibrating with the promise of unspoken pleasures. The choice is yours, and the path ahead is as limitless as your imagination."
+            },
+          },
+          {
+            id: "placeholder_choice_a",
+            type: "type-a",
+            icon: "◆",
+            text: "Ask him who he is",
+            difficultyLabel: "Suspicion",
+            successChance: 1,
+            onSuccess: {
+              next: "GOOD_CONVERSATION",
+              statDelta: -5,
+              log: "-5 Submission\nYou step closer to the young man, your curiosity piqued by his enigmatic presence. 'Who are you?' you ask, your voice steady despite the fluttering in your chest.\n\nHe chuckles softly, a sound that resonates through the forest like a gentle breeze rustling through leaves. 'Ah, names are such fragile things,' he replies, his eyes twinkling with mischief. 'In this place, I am many things—a guide, a guardian, a reflection of your own desires..'\n\nHe extends his hand toward you, his gaze unwavering. 'Remember, lost one, in this realm of desire and temptation, names are less important than the choices you make and the paths you dare to tread.'\n\nYou feel a shiver run down your spine down to your most sensitive Area as you take his hand, the warmth of his touch sending a jolt of electricity through your body."
+            },
+            onFail: {
+              next: "BAD_CONVERSATION",
+              statDelta: -15,
+              log: "-15 Submission\nYou step closer to the young man, your curiosity piqued by his enigmatic presence. 'Who are you?' you ask with a shaky voice. He turns around and looks at you with a cold, piercing gaze. He didn't like your interruption. 'Names are irrelevant here,' he says, his voice low and commanding. 'What matters is the path you choose and the desires you embrace.'\n\nHe "
+            },
+          }    
+        ] 
+      }
     };
 
     /* ---------------------------------------------------------------------
